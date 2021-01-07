@@ -15,11 +15,24 @@
           </ul>
         </div>
       </div>
+      <div class="category-nav">
+        <div class="links container">
+          <ul class="left-side">
+            <router-link to="/vendor-dashboard">
+              <li>
+                Dashboard
+                <img src="@/assets/img/menu.svg" alt="return icon" /></li
+            ></router-link>
+          </ul>
+          <ul class="right-side">
+            <li>
+              <router-link to="/upload-product">Upload product</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <h1>hello from vendor dashboard</h1>
-    <router-link to="/upload-product"
-      ><button>Upload product</button></router-link
-    >
   </div>
 </template>
 

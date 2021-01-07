@@ -15,6 +15,22 @@
           </ul>
         </div>
       </div>
+      <div class="category-nav">
+        <div class="links container">
+          <ul class="left-side">
+            <router-link to="/vendor-dashboard">
+              <li>
+                Dashboard
+                <img src="@/assets/img/menu.svg" alt="return icon" /></li
+            ></router-link>
+          </ul>
+          <ul class="right-side">
+            <li>
+              <router-link to="/upload-product">Upload product</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="form-container">
       <form @submit.prevent="upload()" class="form">
@@ -93,7 +109,7 @@
           </div>
         </div>
         <div class="input-container">
-          <button>Upload</button>
+          <button>Upload<span class="loader" v-if="loading"></span></button>
         </div>
       </form>
     </div>
@@ -253,10 +269,16 @@ export default {
       }
 
       button {
+        display: flex;
+        align-items: center;
         background: var(--cyanBlue);
         border-radius: 5px;
         padding: 0.5rem 2rem;
         margin-top: 1rem;
+
+        span {
+          margin-left: 0.5rem;
+        }
       }
     }
 
