@@ -1,29 +1,87 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import ShopLayout from "../layouts/ShopLayout.vue";
+import VendorLayout from "../layouts/VendorLayout.vue";
+import OnboardingLayout from "../layouts/OnboardingLayout.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    component: ShopLayout,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+        hidden: true,
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: "/",
+    component: VendorLayout,
+    children: [
+      {
+        path: "/vendor-home",
+        name: "VendorHome",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/VendorHome.vue"),
+      },
+      {
+        path: "/vendor-dashboard",
+        name: "VendorDashboard",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/VendorDashboard.vue"
+          ),
+      },
+      {
+        path: "/upload-product",
+        name: "UploadProduct",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/UploadProduct.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: OnboardingLayout,
+    children: [
+      {
+        path: "/signup",
+        name: "CustomerSignup",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/CustomerSignup.vue"),
+      },
+      {
+        path: "/login",
+        name: "CustomerLogin",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/CustomerLogin.vue"),
+      },
+      {
+        path: "/vendor-signup",
+        name: "VendorSignup",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/VendorSignup.vue"),
+      },
+      {
+        path: "/vendor-login",
+        name: "VendorLogin",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/VendorLogin.vue"),
+      },
+    ],
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
