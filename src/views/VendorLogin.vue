@@ -124,10 +124,16 @@ export default {
         }
 
         button {
+          display: flex;
+          align-items: center;
           background: var(--cyanBlue);
           border-radius: 5px;
           padding: 0.5rem 2rem;
           margin-top: 1rem;
+
+          span {
+            margin-left: 0.5rem;
+          }
         }
       }
     }
