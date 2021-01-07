@@ -2,6 +2,10 @@ export const CLEAR_SIGNUP_DETAILS = (state, payload) => {
   state.signupVendor = payload.signupVendor;
 };
 
+export const CLEAR_CUSTOMER_DETAILS = (state, payload) => {
+  state.signupCustomer = payload.signupCustomer;
+};
+
 export const CLEAR_LOGIN_DETAILS = (state, payload) => {
   state.loginDetails = payload.loginDetails;
 };

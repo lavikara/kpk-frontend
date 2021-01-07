@@ -61,7 +61,7 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "Login",
+  name: "VendorLogin",
   data() {
     return {};
   },

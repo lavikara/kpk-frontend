@@ -15,6 +15,9 @@ export default {
   login: (data) => {
     return axios.post(`${USER_URL}/login`, data);
   },
+  signupCustomer: (data) => {
+    return axios.post(`${USER_URL}/signup-customer`, data);
+  },
   signupVendor: (data) => {
     return axios.post(`${USER_URL}/signup-vendor`, data);
   },

@@ -42,6 +42,44 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
   });
 };
 
+export const signupCustomer = ({ commit, dispatch }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .signupCustomer(payload)
+      .then(({ data }) => {
+        if (data.status == "success") {
+          alert("Your registretion was successful");
+          storage.setCustomer(data.data);
+          router.push("/");
+          commit("CLEAR_CUSTOMER_DETAILS", {
+            signupCustomer: {
+              first_name: "",
+              last_name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+              phone_number: "",
+              address: {
+                street: "",
+                lga: "",
+                state: "",
+              },
+            },
+          });
+          commit("SET_LOADING", false, { root: true });
+          resolve({ data });
+        }
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("Email or Phone number already exist");
+        router.push("/");
+        reject({ data });
+      });
+  });
+};
+
 export const loginVendor = ({ commit }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_LOADING", true, { root: true });
@@ -60,7 +98,40 @@ export const loginVendor = ({ commit }, payload) => {
             },
           });
         } else {
-          alert("You're not a vendor");
+          alert("This is not a vendor account");
+          router.push("/");
+        }
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch((error) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("invalid account");
+        reject(error);
+      });
+  });
+};
+
+export const loginCustomer = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .login(payload)
+      .then(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+
+        if (data.status == "success" && data.data.user.role === "customer") {
+          storage.setCustomer(data.data);
+          router.push("/");
+          commit("CLEAR_LOGIN_DETAILS", {
+            loginDetails: {
+              email: "",
+              password: "",
+            },
+          });
+        } else {
+          alert("This is not a customer account");
+          router.push("/");
         }
         commit("SET_LOADING", false, { root: true });
         resolve({ data });

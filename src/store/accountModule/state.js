@@ -18,6 +18,19 @@ export default {
     business_name: "",
     cac_number: "",
   },
+  signupCustomer: {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone_number: "",
+    address: {
+      street: "",
+      lga: "",
+      state: "",
+    },
+  },
   formValidation: {
     first_name: false,
     last_name: false,
