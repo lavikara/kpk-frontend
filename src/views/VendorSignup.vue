@@ -263,7 +263,9 @@
           </div>
         </div>
         <div class="input-container">
-          <button :disabled="loading === true">Submit</button>
+          <button :disabled="loading === true">
+            Submit<span class="loader" v-if="loading"></span>
+          </button>
         </div>
       </form>
     </div>
