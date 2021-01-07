@@ -8,6 +8,7 @@
 import ShopNav from "@/components/ShopNav.vue";
 
 export default {
+  name: "ShopLayout",
   components: {
     ShopNav,
   },
