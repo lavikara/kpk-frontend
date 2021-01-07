@@ -6,7 +6,7 @@ const USER_URL = `${BASE_URL}/user`;
 const PRODUCT_URL = `${BASE_URL}/product`;
 
 export default {
-  getHeader() {
+  getVendorHeader() {
     let header = {
       Authorization: "bearer " + storage.getVendorToken(),
     };
@@ -20,7 +20,7 @@ export default {
   },
   createProduct(data) {
     return axios.post(`${PRODUCT_URL}/create`, data, {
-      headers: this.getHeader(),
+      headers: this.getVendorHeader(),
     });
   },
 };
