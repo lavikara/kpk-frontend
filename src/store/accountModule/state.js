@@ -1,7 +1,7 @@
 export default {
   loginDetails: {
-    email: "karatemitayo@gmail.com",
-    password: "123456",
+    email: "",
+    password: "",
   },
   signupVendor: {
     first_name: "",
