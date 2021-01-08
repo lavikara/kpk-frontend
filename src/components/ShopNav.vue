@@ -21,10 +21,14 @@
       <div class="links">
         <ul>
           <li>
-            <router-link to="/login">Login</router-link>
+            <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
+            <router-link to="/customer-account" v-if="isLoggedIn"
+              >Hi {{ initials }}</router-link
+            >
           </li>
           <li>
-            <router-link to="/signup">Signup</router-link>
+            <router-link to="/signup" v-if="!isLoggedIn">Signup</router-link>
+            <a @click="logout" v-if="isLoggedIn">Logout</a>
           </li>
         </ul>
         <ul>
@@ -62,8 +66,41 @@
 </template>
 
 <script>
+import storage from "@/utils/storage.js";
+
 export default {
-  name: "TopNav",
+  name: "ShopNav",
+  data() {
+    return {
+      isLoggedIn: storage.getCustomerDetails(),
+      initials: "",
+    };
+  },
+  mounted() {
+    this.getInitials();
+  },
+  methods: {
+    getInitials() {
+      if (this.isLoggedIn) {
+        const firstName = this.isLoggedIn.user.first_name
+          .charAt(0)
+          .toUpperCase();
+        const lastName = this.isLoggedIn.user.last_name.charAt(0).toUpperCase();
+        this.initials = firstName + "." + lastName;
+      }
+    },
+    logout() {
+      localStorage.removeItem("customer_details");
+      if (this.$route.name === "Home") {
+        this.$router.push("/shop");
+      } else if (
+        this.$route.name === "Shop" ||
+        this.$route.name === "CustomerAccount"
+      ) {
+        this.$router.push("/");
+      }
+    },
+  },
 };
 </script>
 
