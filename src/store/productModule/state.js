@@ -9,4 +9,7 @@ export default {
       quantity_available: "",
     },
   },
+  product: {
+    allProduct: ""
+  }
 };
