@@ -26,4 +26,7 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  getAllProducts: () => {
+    return axios.get(`${PRODUCT_URL}/get-all-product`);
+  },
 };
