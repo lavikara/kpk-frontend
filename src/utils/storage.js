@@ -8,7 +8,7 @@ export default {
   getVendorDetails() {
     return JSON.parse(localStorage.getItem("vendor_details"));
   },
-  getCustomerDetails(data) {
+  getCustomerDetails() {
     return JSON.parse(localStorage.getItem("customer_details"));
   },
   getVendorToken() {
