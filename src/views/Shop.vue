@@ -1,41 +1,85 @@
 <template>
   <div id="home">
-    <div class="top-section container">
+    <section class="top-section container">
       <div class="left">
         <img
-          src="https://ng.jumia.is//cms/Homepage/2020/W40/BSB-Jumia-Plus-.gif"
+          class="img-side"
+          src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/v1609798621/contentservice/babyJara.png_SkNyNG-CP.png"
           alt="advert"
         />
         <img
+          class="img-side"
           src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/v1609798623/contentservice/drinksJara.png_S17kEGWCP.png"
           alt="advert"
         />
       </div>
       <div class="center">
         <img
-          src="https://ng.jumia.is/cms/Homepage/2021/w01/1E72A15D-7BE8-4E9B-B8BD-E71F28D492B3.jpeg"
+          src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/v1608712743/contentservice/ASUS.png_HkyEGKx6D.png"
+          alt="advert"
+        />
+        <img
+          src="https://ng.jumia.is/cms/Homepage/2020/W49/CB-dod.jpg"
           alt="advert"
         />
       </div>
       <div class="right">
         <img
-          src="https://ng.jumia.is//cms/Homepage/2020/W40/BSB-Jumia-Plus-.gif"
+          class="img-side"
+          src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/v1609798617/contentservice/agricJara.png_Hkl1NMbAw.png"
           alt="advert"
         />
         <img
-          src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/v1609798623/contentservice/drinksJara.png_S17kEGWCP.png"
+          class="img-side"
+          src="https://www-konga-com-res.cloudinary.com/image/upload/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/v1609845484/contentservice/5k.png_S1mej6bAw.png"
           alt="advert"
         />
       </div>
-    </div>
+    </section>
+    <section class="body container">
+      <div
+        class="product-item"
+        v-for="(product, index) in products"
+        :key="index"
+      >
+        <div class="centered-content">
+          <div class="image-container">
+            <img :src="product.image" />
+          </div>
+          <div class="product-name">{{ product.name | setUppercase }}</div>
+          <div class="product-description">
+            <p>
+              {{ product.description | shortenString | setUppercase }}
+            </p>
+          </div>
+
+          <div class="price">₦ {{ product.price.toLocaleString() }}</div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Home",
+  data() {
+    return {};
+  },
+  mounted() {
+    this.getAllProducts();
+  },
+  computed: {
+    ...mapState({
+      loading: (state) => state.loading,
+      products: (state) => state.productModule.product.allProduct,
+    }),
+  },
+  methods: {
+    ...mapActions("productModule", ["getAllProducts"]),
+  },
 };
 </script>
 
