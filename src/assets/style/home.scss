@@ -3,14 +3,19 @@
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     margin-top: 2rem;
+    column-gap: 0.5rem;
 
     .left,
     .right,
     .center {
-      margin: 0 0.5rem;
       img {
-        border-radius: 5px;
+        border-radius: 15px;
+        align-self: center;
         margin: 0 0 0.5rem 0;
+      }
+
+      .img-side {
+        margin: 0 0 1rem 0;
       }
     }
 
@@ -24,7 +29,70 @@
 
     .center {
       img {
-        height: 79%;
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+  }
+  .body {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-bottom: 10rem;
+
+    .product-item {
+      background: #ffffff;
+      margin: 2rem 0.3rem;
+      border-radius: 10px;
+      // box-shadow: 0 0 5px #99b8e9;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        box-shadow: 0 0 5px #99b8e9;
+        transform: scale(0.99);
+      }
+
+      .centered-content {
+        .image-container {
+          height: 15rem;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+
+          img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 1rem;
+            width: 100%;
+            position: relative;
+            object-position: bottom;
+            object-fit: contain;
+            max-height: 100%;
+            border-bottom: 1px solid var(--cyanBlue);
+          }
+        }
+
+        .product-name {
+          text-align: left;
+          margin-left: 0.5rem;
+        }
+
+        .product-description {
+          font-size: 14px;
+          text-align: left;
+          margin: 0.3rem 0 0.5rem 0.5rem;
+          height: 2rem;
+          opacity: 0.7;
+        }
+
+        .price {
+          font-size: 16px;
+          font-weight: 700;
+          text-align: left;
+          margin-left: 0.5rem;
+          margin-bottom: 1rem;
+        }
       }
     }
   }
