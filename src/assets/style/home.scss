@@ -43,9 +43,8 @@
       background: #ffffff;
       margin: 2rem 0.3rem;
       border-radius: 10px;
-      // box-shadow: 0 0 5px #99b8e9;
-      cursor: pointer;
       transition: all 0.3s;
+      cursor: pointer;
 
       &:hover {
         box-shadow: 0 0 5px #99b8e9;
@@ -69,7 +68,6 @@
             object-position: bottom;
             object-fit: contain;
             max-height: 100%;
-            border-bottom: 1px solid var(--cyanBlue);
           }
         }
 
