@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import ShopLayout from "../layouts/ShopLayout.vue";
 import VendorLayout from "../layouts/VendorLayout.vue";
 import OnboardingLayout from "../layouts/OnboardingLayout.vue";
+import CustomerAuthLayout from "../layouts/CustomerAuthLayout.vue";
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,26 @@ const routes = [
         name: "Home",
         component: Home,
         hidden: true,
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: CustomerAuthLayout,
+    children: [
+      {
+        path: "/customer-account",
+        name: "CustomerAccount",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../views/CustomerAccount.vue"
+          ),
+      },
+      {
+        path: "/shop",
+        name: "Shop",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/Shop.vue"),
       },
     ],
   },
