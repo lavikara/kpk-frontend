@@ -9,6 +9,7 @@ import * as mutations from "./mutations";
 import * as actions from "./actions";
 import accountModule from "./accountModule/index";
 import productModule from "./productModule/index";
+import cartModule from "./cartModule/index";
 
 export default new Vuex.Store({
   state,
@@ -18,5 +19,6 @@ export default new Vuex.Store({
   modules: {
     accountModule,
     productModule,
+    cartModule,
   },
 });
