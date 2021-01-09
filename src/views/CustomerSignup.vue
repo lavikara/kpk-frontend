@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ShopNav />
     <div id="vendor-signup">
       <div class="form-container">
         <form @submit.prevent="signup()" class="form">
@@ -218,13 +217,9 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import ShopNav from "@/components/ShopNav.vue";
 
 export default {
   name: "CustomerSignup",
-  components: {
-    ShopNav,
-  },
   computed: {
     ...mapState({
       loading: (state) => state.loading,

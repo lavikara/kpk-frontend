@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ShopNav />
     <div id="login">
       <div class="form-container">
         <form @submit.prevent="login()" class="form">
@@ -43,13 +42,9 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import ShopNav from "@/components/ShopNav.vue";
 
 export default {
   name: "CustomerLogin",
-  components: {
-    ShopNav,
-  },
   data() {
     return {};
   },
