@@ -23,7 +23,7 @@
           <li>
             <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
             <router-link to="/customer-account" v-if="isLoggedIn">{{
-              initials | setUppercase | nameShortenString
+              initials | nameShortenString
             }}</router-link>
           </li>
           <li>
