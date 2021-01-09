@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <VendorNav /> -->
+    <VendorNav />
     <router-view></router-view>
   </div>
 </template>
@@ -9,6 +9,7 @@
 import VendorNav from "@/components/VendorNav.vue";
 
 export default {
+  name: "VendorLayout",
   components: {
     VendorNav,
   },
