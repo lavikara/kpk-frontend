@@ -22,9 +22,9 @@
         <ul>
           <li>
             <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-            <router-link to="/customer-account" v-if="isLoggedIn"
-              >Hi {{ initials }}</router-link
-            >
+            <router-link to="/customer-account" v-if="isLoggedIn">{{
+              initials
+            }}</router-link>
           </li>
           <li>
             <router-link to="/signup" v-if="!isLoggedIn">Signup</router-link>
@@ -33,7 +33,8 @@
         </ul>
         <ul>
           <li class="cart-btn">
-            cart <img src="@/assets/img/cart.svg" alt="trolley icon" />
+            Cart <img src="@/assets/img/cart.svg" alt="trolley icon" />
+            <span>{{ cartCounter }}</span>
           </li>
         </ul>
       </div>
@@ -66,6 +67,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import storage from "@/utils/storage.js";
 
 export default {
@@ -77,20 +79,29 @@ export default {
     };
   },
   mounted() {
+    if (!this.isLoggedIn) {
+      return;
+    }
     this.getInitials();
+    this.updateCartCounter();
+  },
+  computed: {
+    ...mapState({
+      loading: (state) => state.loading,
+      cartCounter: (state) => state.cartModule.cart.cartCounter,
+    }),
   },
   methods: {
+    ...mapActions("cartModule", ["updateCartCounter", "resetCartCounter"]),
     getInitials() {
       if (this.isLoggedIn) {
-        const firstName = this.isLoggedIn.user.first_name
-          .charAt(0)
-          .toUpperCase();
-        const lastName = this.isLoggedIn.user.last_name.charAt(0).toUpperCase();
-        this.initials = firstName + "." + lastName;
+        const firstName = this.isLoggedIn.user.first_name;
+        this.initials = firstName;
       }
     },
     logout() {
       localStorage.removeItem("customer_details");
+      this.resetCartCounter(0);
       if (this.$route.name === "Home") {
         this.$router.push("/shop");
       } else if (
@@ -168,6 +179,7 @@ export default {
         }
 
         .cart-btn {
+          position: relative;
           display: flex;
           align-items: center;
           border: 1px solid #ffffff;
@@ -176,6 +188,17 @@ export default {
 
           img {
             margin-left: 0.5rem;
+          }
+
+          span {
+            position: absolute;
+            top: 0.1rem;
+            right: 1.5rem;
+            color: var(--cyanBlue);
+            font-size: 0.6rem;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 0.1rem 0.3rem;
           }
         }
       }
