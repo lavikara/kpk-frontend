@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ShopLayout from "../layouts/ShopLayout.vue";
 import VendorLayout from "../layouts/VendorLayout.vue";
-import OnboardingLayout from "../layouts/OnboardingLayout.vue";
+import CustomerOnboardingLayout from "../layouts/CustomerOnboardingLayout.vue";
+import VendorOnboardingLayout from "../layouts/VendorOnboardingLayout.vue";
 import CustomerAuthLayout from "../layouts/CustomerAuthLayout.vue";
 
 Vue.use(VueRouter);
@@ -69,7 +70,7 @@ const routes = [
   },
   {
     path: "/",
-    component: OnboardingLayout,
+    component: CustomerOnboardingLayout,
     children: [
       {
         path: "/signup",
@@ -83,6 +84,12 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/CustomerLogin.vue"),
       },
+    ],
+  },
+  {
+    path: "/",
+    component: VendorOnboardingLayout,
+    children: [
       {
         path: "/vendor-signup",
         name: "VendorSignup",
