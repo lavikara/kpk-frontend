@@ -42,11 +42,16 @@
         v-for="(product, index) in products"
         :key="index"
       >
-        <div class="centered-content">
+        <div
+          @click="navigateTo(`/product/${product.name}/id/${product.id}`)"
+          class="centered-content"
+        >
           <div class="image-container">
             <img :src="product.image" />
           </div>
-          <div class="product-name">{{ product.name | setUppercase }}</div>
+          <div class="product-name">
+            {{ product.name | nameShortenString | setUppercase }}
+          </div>
           <div class="product-description">
             <p>
               {{ product.description | shortenString | setUppercase }}
@@ -54,10 +59,8 @@
           </div>
 
           <div class="price">₦ {{ product.price.toLocaleString() }}</div>
-          <button>
-            Add to cart<span class="loader" v-if="loading"></span>
-          </button>
         </div>
+        <button>Add to cart</button>
       </div>
     </section>
   </div>
@@ -82,6 +85,12 @@ export default {
   },
   methods: {
     ...mapActions("productModule", ["getAllProducts"]),
+    navigateTo(page) {
+      if (page.split("/")[2] === "undefined") {
+        return;
+      }
+      this.$router.push(page);
+    },
   },
 };
 </script>
