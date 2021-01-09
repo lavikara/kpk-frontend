@@ -40,18 +40,23 @@
     margin-bottom: 10rem;
 
     .product-item {
-      background: #ffffff;
       margin: 2rem 0.3rem;
+      margin-bottom: 0;
       border-radius: 10px;
       transition: all 0.3s;
-      cursor: pointer;
 
       &:hover {
         box-shadow: 0 0 5px #99b8e9;
         transform: scale(0.99);
       }
 
+      &:hover button {
+        visibility: visible;
+      }
+
       .centered-content {
+        cursor: pointer;
+
         .image-container {
           height: 15rem;
           width: 100%;
@@ -91,24 +96,24 @@
           margin-left: 0.5rem;
           margin-bottom: 1rem;
         }
+      }
+      button {
+        visibility: hidden;
+        align-items: center;
+        margin: auto;
+        background: var(--cyanBlue);
+        border-radius: 5px;
+        padding: 0.5rem 2rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s;
 
-        button {
-          align-items: center;
-          margin: auto;
-          background: var(--cyanBlue);
-          border-radius: 5px;
-          padding: 0.5rem 2rem;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-          transition: all 0.3s;
+        span {
+          margin-left: 0.5rem;
+        }
 
-          span {
-            margin-left: 0.5rem;
-          }
-
-          &:hover {
-            transform: scale(1.05);
-          }
+        &:hover {
+          transform: scale(1.05);
         }
       }
     }
