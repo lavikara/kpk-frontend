@@ -7,9 +7,33 @@
         /></a>
       </h1>
       <div class="links">
-        <ul>
+        <ul v-if="!isLoggedIn">
+          <li>
+            <router-link to="/vendor-login">Login</router-link>
+          </li>
+          <li>
+            <router-link to="/vendor-signup">Signup</router-link>
+          </li>
+        </ul>
+        <ul v-if="isLoggedIn">
           <li @click="logout">
             Logout
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div v-if="isLoggedIn" class="category-nav">
+      <div class="links container">
+        <ul class="left-side">
+          <router-link to="/vendor-dashboard">
+            <li>
+              Dashboard
+              <img src="@/assets/img/menu.svg" alt="return icon" /></li
+          ></router-link>
+        </ul>
+        <ul class="right-side">
+          <li>
+            <router-link to="/upload-product">Upload product</router-link>
           </li>
         </ul>
       </div>
@@ -18,10 +42,14 @@
 </template>
 
 <script>
+import storage from "@/utils/storage.js";
+
 export default {
   name: "TopNav",
   data() {
-    return {};
+    return {
+      isLoggedIn: storage.getVendorDetails(),
+    };
   },
   computed: {},
   methods: {
