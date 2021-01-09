@@ -11,6 +11,13 @@ Vue.filter("shortenString", (value) => {
     return value;
   }
 });
+Vue.filter("nameShortenString", (value) => {
+  if (value.length > 9) {
+    return value.slice(0, 6) + "...";
+  } else {
+    return value;
+  }
+});
 Vue.filter("setUppercase", (value) => {
   return value[0].toUpperCase() + value.slice(1).toLowerCase();
 });
