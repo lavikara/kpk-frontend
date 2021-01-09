@@ -104,10 +104,7 @@ export default {
       this.resetCartCounter(0);
       if (this.$route.name === "Home") {
         this.$router.push("/shop");
-      } else if (
-        this.$route.name === "Shop" ||
-        this.$route.name === "CustomerAccount"
-      ) {
+      } else if (this.$route.name !== "Home") {
         this.$router.push("/");
       }
     },
