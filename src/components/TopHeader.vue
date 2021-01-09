@@ -6,7 +6,7 @@
           hello@kpk.com <img src="@/assets/img/email.svg" alt="email icon" />
         </a>
         <router-link to="/vendor-home" class="vendor-signup-btn"
-          >Become a vendor</router-link
+          >Vendors</router-link
         >
       </div>
       <div class="right-side">
