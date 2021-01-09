@@ -54,6 +54,9 @@
           </div>
 
           <div class="price">₦ {{ product.price.toLocaleString() }}</div>
+          <button>
+            Add to cart<span class="loader" v-if="loading"></span>
+          </button>
         </div>
       </div>
     </section>
