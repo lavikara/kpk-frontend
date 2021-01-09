@@ -51,6 +51,7 @@ export const signupCustomer = ({ commit, dispatch }, payload) => {
         if (data.status == "success") {
           alert("Your registretion was successful");
           storage.setCustomer(data.data);
+          dispatch("cartModule/updateCartCounter", {}, { root: true });
           router.push("/");
           commit("CLEAR_CUSTOMER_DETAILS", {
             signupCustomer: {
@@ -112,7 +113,7 @@ export const loginVendor = ({ commit }, payload) => {
   });
 };
 
-export const loginCustomer = ({ commit }, payload) => {
+export const loginCustomer = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_LOADING", true, { root: true });
     api
@@ -122,6 +123,7 @@ export const loginCustomer = ({ commit }, payload) => {
 
         if (data.status == "success" && data.data.user.role === "customer") {
           storage.setCustomer(data.data);
+          dispatch("cartModule/updateCartCounter", {}, { root: true });
           router.push("/");
           commit("CLEAR_LOGIN_DETAILS", {
             loginDetails: {
