@@ -10,6 +10,7 @@ export default {
     },
   },
   product: {
-    allProduct: ""
-  }
+    allProduct: "",
+    singleProduct: "",
+  },
 };

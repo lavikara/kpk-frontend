@@ -55,3 +55,23 @@ export const getAllProducts = ({ commit }) => {
       });
   });
 };
+
+export const getProductById = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .getProductById(payload)
+      .then(({ data }) => {
+        commit("UPDATE_SINGLE_PRODUCT", {
+          product: data.data,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};
