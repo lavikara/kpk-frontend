@@ -22,9 +22,9 @@
         <ul>
           <li>
             <router-link to="/login" v-if="!isLoggedIn">Login</router-link>
-            <router-link to="/customer-account" v-if="isLoggedIn">{{
-              initials | nameShortenString
-            }}</router-link>
+            <router-link to="/customer-account" v-if="isLoggedIn && initials"
+              >Hi {{ initials | nameShortenString | setUppercase }}</router-link
+            >
           </li>
           <li>
             <router-link to="/signup" v-if="!isLoggedIn">Signup</router-link>
@@ -120,7 +120,7 @@ export default {
   position: sticky;
   top: 0;
   background: var(--cyanBlue);
-  z-index: 100000;
+  z-index: 1000;
 
   .topnav {
     display: flex;
