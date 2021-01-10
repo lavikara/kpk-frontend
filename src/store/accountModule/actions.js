@@ -51,7 +51,6 @@ export const signupCustomer = ({ commit, dispatch }, payload) => {
         if (data.status == "success") {
           alert("Your registretion was successful");
           storage.setCustomer(data.data);
-          dispatch("cartModule/updateCartCounter", {}, { root: true });
           router.push("/");
           commit("CLEAR_CUSTOMER_DETAILS", {
             signupCustomer: {
