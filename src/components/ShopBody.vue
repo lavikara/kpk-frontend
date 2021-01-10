@@ -50,7 +50,9 @@
             <img :src="product.image" />
           </div>
           <div class="product-name">
-            {{ product.name | nameShortenString | setUppercase }}
+            <h4>
+              {{ product.name | nameShortenString | setUppercase }}
+            </h4>
           </div>
           <div class="product-description">
             <p>
@@ -58,9 +60,11 @@
             </p>
           </div>
 
-          <div class="price">₦ {{ product.price.toLocaleString() }}</div>
+          <div class="price">
+            <h4>₦ {{ product.price.toLocaleString() }}</h4>
+          </div>
         </div>
-        <button>Add to cart</button>
+        <button @click="add(product.id)">Add to cart</button>
       </div>
     </section>
   </div>
@@ -85,6 +89,10 @@ export default {
   },
   methods: {
     ...mapActions("productModule", ["getAllProducts"]),
+    ...mapActions("cartModule", ["addToCart"]),
+    add(id) {
+      this.addToCart({ product_id: id });
+    },
     navigateTo(page) {
       if (page.split("/")[2] === "undefined") {
         return;
