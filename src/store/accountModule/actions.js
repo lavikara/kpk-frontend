@@ -9,7 +9,15 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
       .signupVendor(payload)
       .then(({ data }) => {
         if (data.status == "success") {
-          alert("Your registretion was successful");
+          dispatch(
+            "notificationModule/showToast",
+            {
+              description: "Your registretion was successful",
+              display: true,
+              type: "success",
+            },
+            { root: true }
+          );
           storage.setVendor(data.data);
           router.push("/vendor-dashboard");
           commit("CLEAR_SIGNUP_DETAILS", {
@@ -35,7 +43,15 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
       })
       .catch(({ data }) => {
         commit("SET_LOADING", false, { root: true });
-        alert("Email or Phone number already exist");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "Email or Phone number already exist",
+            display: true,
+            type: "success",
+          },
+          { root: true }
+        );
         router.push("/vendor-home");
         reject({ data });
       });
@@ -49,7 +65,15 @@ export const signupCustomer = ({ commit, dispatch }, payload) => {
       .signupCustomer(payload)
       .then(({ data }) => {
         if (data.status == "success") {
-          alert("Your registretion was successful");
+          dispatch(
+            "notificationModule/showToast",
+            {
+              description: "Your registretion was successful",
+              display: true,
+              type: "success",
+            },
+            { root: true }
+          );
           storage.setCustomer(data.data);
           router.push("/");
           commit("CLEAR_CUSTOMER_DETAILS", {
@@ -73,7 +97,15 @@ export const signupCustomer = ({ commit, dispatch }, payload) => {
       })
       .catch(({ data }) => {
         commit("SET_LOADING", false, { root: true });
-        alert("Email or Phone number already exist");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "Email or Phone number already exist",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
         router.push("/");
         reject({ data });
       });
