@@ -36,8 +36,26 @@ export default {
   getAllProducts: () => {
     return axios.get(`${PRODUCT_URL}/get-all-product`);
   },
+  getProductById: (id) => {
+    return axios.get(`${PRODUCT_URL}`, { params: { id } });
+  },
   getCart() {
     return axios.get(`${CART_URL}/get-cart`, {
+      headers: this.getCustomerToken(),
+    });
+  },
+  addToCart(data) {
+    return axios.post(`${CART_URL}/add-to-cart`, data, {
+      headers: this.getCustomerToken(),
+    });
+  },
+  removeFromCart(data) {
+    return axios.post(`${CART_URL}/remove-from-cart`, data, {
+      headers: this.getCustomerToken(),
+    });
+  },
+  deleteFromCart(data) {
+    return axios.post(`${CART_URL}/delete-from-cart`, data, {
       headers: this.getCustomerToken(),
     });
   },
