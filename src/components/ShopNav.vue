@@ -32,10 +32,12 @@
           </li>
         </ul>
         <ul>
-          <li class="cart-btn">
-            Cart <img src="@/assets/img/cart.svg" alt="trolley icon" />
-            <span>{{ cartCounter }}</span>
-          </li>
+          <router-link to="/cart">
+            <li class="cart-btn">
+              Cart <img src="@/assets/img/cart.svg" alt="cart icon" />
+              <span>{{ cartCounter }}</span>
+            </li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -115,7 +117,10 @@ export default {
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap");
 #topnav {
+  position: sticky;
+  top: 0;
   background: var(--cyanBlue);
+  z-index: 100000;
 
   .topnav {
     display: flex;
@@ -154,7 +159,7 @@ export default {
         background: #99b8e9;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
-        padding: 0rem 1rem 0 0.7rem;
+        padding: 0.4rem 1rem 0 0.7rem;
       }
     }
 
@@ -189,13 +194,17 @@ export default {
 
           span {
             position: absolute;
-            top: 0.1rem;
-            right: 1.5rem;
+            top: 0.08rem;
+            right: 1rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: var(--cyanBlue);
             font-size: 0.6rem;
             background: #ffffff;
             border-radius: 50%;
-            padding: 0.1rem 0.3rem;
           }
         }
       }
