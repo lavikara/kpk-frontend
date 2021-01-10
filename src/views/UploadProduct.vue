@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="upload-product">
     <div class="form-container">
       <form @submit.prevent="upload()" class="form">
         <div class="input-container">
@@ -49,6 +49,11 @@
               @change="handleFileChange($event)"
               class="input-field file-input"
               required
+            />
+            <img
+              :src="details.image"
+              alt="product image"
+              v-if="details.image"
             />
           </div>
         </div>
@@ -110,6 +115,7 @@ export default {
   },
   methods: {
     ...mapActions("productModule", ["createProduct"]),
+    ...mapActions("notificationModule", ["showToast"]),
     upload() {
       this.createProduct(this.details);
     },
@@ -129,7 +135,11 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.details.image = data.secure_url;
-          alert("upload complete");
+          this.showToast({
+            description: "Upload completed",
+            display: true,
+            type: "success",
+          });
         })
         .catch((err) => console.error(err));
     },
@@ -142,116 +152,141 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-container {
-  max-width: 50%;
-  margin: auto;
-  border-radius: 5px;
-  padding: 1rem 0;
+#upload-product {
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
 
-  .form {
-    .input-container {
-      display: flex;
-      justify-content: space-evenly;
-      margin: 1rem 0;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-      div {
-        width: 49%;
+  .form-container {
+    max-width: 50%;
+    margin: auto;
+    border-radius: 5px;
+    padding: 1rem 0;
 
-        label,
-        span {
-          width: 100%;
-          display: flex;
-          font-size: 0.8rem;
-          margin-left: 1rem;
-        }
+    .form {
+      .input-container {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1rem 0;
 
-        .address-label {
-          margin-left: 1.4rem;
-        }
+        div {
+          width: 49%;
 
-        .input-field {
-          width: 90%;
-          color: var(--cyanBlue);
-          font-size: 14px;
-          border: 1px solid var(--cyanBlue);
-          border-radius: 5px;
-          padding: 0.5rem;
-        }
+          label,
+          span {
+            width: 100%;
+            display: flex;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+          }
 
-        .file-input {
-          width: 94%;
-          padding: 0;
-          cursor: pointer;
-        }
+          .address-label {
+            margin-left: 1.4rem;
+          }
 
-        span {
-          color: #dc3545;
-          font-size: 0.7rem;
-          transition: all 0.5s linear;
-          animation: slideError 0.5s linear;
-        }
-        @media screen and (max-width: 600px) {
-          width: 100%;
-        }
+          .input-field {
+            width: 90%;
+            color: var(--cyanBlue);
+            font-size: 14px;
+            border: 1px solid var(--cyanBlue);
+            border-radius: 5px;
+            padding: 0.5rem;
+          }
 
-        .address {
-          width: 81%;
-        }
+          .file-input {
+            width: 94%;
+            padding: 0;
+            cursor: pointer;
+          }
 
-        .invalid {
-          border: 1px solid #dc3545;
-        }
-        .disabled {
-          border: 1px solid rgba(0, 0, 0, 0.2);
-          &::placeholder {
-            color: rgba(0, 0, 0, 0.2);
+          span {
+            color: #dc3545;
+            font-size: 0.7rem;
+            transition: all 0.5s linear;
+            animation: slideError 0.5s linear;
+          }
+          @media screen and (max-width: 600px) {
+            width: 100%;
+          }
+
+          .address {
+            width: 81%;
+          }
+
+          .invalid {
+            border: 1px solid #dc3545;
+          }
+          .disabled {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            &::placeholder {
+              color: rgba(0, 0, 0, 0.2);
+            }
+          }
+
+          .fade-enter-active,
+          .fade-leave-active {
+            transition: all 0.3s cubic-bezier(0.45, 0.25, 0.6, 0.95);
+          }
+          .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
           }
         }
 
-        .fade-enter-active,
-        .fade-leave-active {
-          transition: all 0.3s cubic-bezier(0.45, 0.25, 0.6, 0.95);
+        .file-input-container {
+          position: relative;
+          padding: 0;
+
+          img {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            height: 4rem;
+          }
         }
-        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-          opacity: 0;
+
+        .file-input::-webkit-file-upload-button {
+          visibility: hidden;
+        }
+
+        .file-input::before {
+          content: "Select image *";
+          width: 100%;
+          display: inline-block;
+          padding: 5px 8px 60px 8px;
+          -webkit-user-select: none;
+          font-size: 14px;
+          color: #757575;
+          background: #ffffff;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          background: var(--cyanBlue);
+          border-radius: 5px;
+          padding: 0.5rem 2rem;
+          margin-top: 1rem;
+
+          span {
+            margin-left: 0.5rem;
+          }
         }
       }
 
-      .file-input-container {
-        padding: 0;
+      .form-section {
+        margin-top: 4rem;
       }
-
-      .file-input::-webkit-file-upload-button {
-        visibility: hidden;
-      }
-
-      .file-input::before {
-        content: "Select image *";
-        width: 100%;
-        display: inline-block;
-        padding: 5px 8px 60px 8px;
-        -webkit-user-select: none;
-        font-size: 14px;
-        color: #757575;
-        background: #ffffff;
-      }
-
-      button {
-        display: flex;
-        align-items: center;
-        background: var(--cyanBlue);
-        border-radius: 5px;
-        padding: 0.5rem 2rem;
-        margin-top: 1rem;
-
-        span {
-          margin-left: 0.5rem;
-        }
-      }
-    }
-
-    .form-section {
-      margin-top: 4rem;
     }
   }
 }

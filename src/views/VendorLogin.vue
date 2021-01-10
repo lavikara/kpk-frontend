@@ -63,6 +63,21 @@ export default {
 
 <style lang="scss" scoped>
 #login {
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   .form-container {
     max-width: 50%;
     margin: auto;
