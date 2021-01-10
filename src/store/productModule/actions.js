@@ -1,5 +1,4 @@
 import api from "@/utils/api.js";
-import router from "../../router";
 
 export const createProduct = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
@@ -19,7 +18,6 @@ export const createProduct = ({ commit, dispatch }, payload) => {
             },
             { root: true }
           );
-          // router.push("/vendor-dashboard");
           commit("CLEAR_UPLOAD_PRODUCT", {
             uploadProduct: {
               name: "",
