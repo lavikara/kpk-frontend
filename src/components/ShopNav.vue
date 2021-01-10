@@ -49,6 +49,7 @@
           </li>
         </ul>
         <ul class="right-side">
+          <li>Stores</li>
           <li>
             Household
           </li>
