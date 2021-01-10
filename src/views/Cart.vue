@@ -64,11 +64,21 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import storage from "@/utils/storage.js";
 
 export default {
   name: "Cart",
   data() {
     return {};
+  },
+  beforeRouteEnter: (to, from, next) => {
+    if (!storage.getCustomerDetails()) {
+      next((vm) => {
+        vm.$router.push("/shop");
+      });
+    } else {
+      next();
+    }
   },
   created() {
     this.getCart();
