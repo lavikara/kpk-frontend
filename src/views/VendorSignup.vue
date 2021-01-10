@@ -270,10 +270,15 @@ export default {
   },
   methods: {
     ...mapActions("accountModule", ["signupVendor", "validate"]),
+    ...mapActions("notificationModule", ["showModal"]),
 
     signup() {
       if (Object.values(this.formValidation).includes(true)) {
-        alert("invalid input detected, please fill form correctly.");
+        this.showModal({
+          description: "invalid input detected, please fill form correctly.",
+          display: true,
+          type: "info",
+        });
       } else {
         delete this.details.confirmPassword;
         this.signupVendor(this.details);
