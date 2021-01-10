@@ -15,7 +15,8 @@
             <router-link to="/vendor-signup">Signup</router-link>
           </li>
         </ul>
-        <ul v-if="isLoggedIn">
+        <ul v-if="isLoggedIn && initials">
+          <li>{{ initials | nameShortenString | setUppercase }}</li>
           <li @click="logout">
             Logout
           </li>
@@ -35,6 +36,9 @@
           <li>
             <router-link to="/upload-product">Upload product</router-link>
           </li>
+          <li>
+            <router-link to="/edit-product">Edit product</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -42,17 +46,31 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import storage from "@/utils/storage.js";
 
 export default {
-  name: "TopNav",
+  name: "VendorNav",
   data() {
     return {
       isLoggedIn: storage.getVendorDetails(),
+      initials: "",
     };
+  },
+  mounted() {
+    if (!this.isLoggedIn) {
+      return;
+    }
+    this.getInitials();
   },
   computed: {},
   methods: {
+    getInitials() {
+      if (this.isLoggedIn) {
+        const firstName = this.isLoggedIn.user.business_name;
+        this.initials = firstName;
+      }
+    },
     logout() {
       localStorage.clear();
       this.$router.push("/");
@@ -157,20 +175,22 @@ export default {
 
         &:last-child {
           width: 80%;
-          justify-content: space-between;
+          justify-content: flex-start;
         }
 
         li {
           display: flex;
           align-items: center;
 
-          &:last-child {
-            margin-right: 0;
-          }
-
           img {
             margin-left: 0.3rem;
           }
+        }
+      }
+
+      &:last-child {
+        li {
+          margin: 0 3rem 0 0;
         }
       }
     }
