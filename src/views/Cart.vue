@@ -1,87 +1,106 @@
 <template>
-  <div id="cart" class="container">
-    <div class="items-container">
-      <ul v-for="(item, index) in cart.items" :key="index" class="items">
-        <li>
-          <img :src="item.image" alt="product image" />
-        </li>
-        <li class="item left-align">
-          <h3>{{ item.name }}</h3>
-          <p>{{ item.description }}</p>
-        </li>
-        <li class="item quantity">
-          <label for="price">Quantity</label>
-          <div>
-            <span>
-              <img
-                src="@/assets/img/chevron-down.svg"
-                alt="chevron icon"
-                @click="remove(item.id)"
-              />
-            </span>
-            <h4>{{ item.quantity }}</h4>
-            <span>
-              <img
-                src="@/assets/img/chevron-up.svg"
-                alt="chevron icon"
-                @click="add(item.id)"
-              />
-            </span>
-          </div>
-        </li>
-        <li class="item">
-          <label for="price">Unit price</label>
-          <h4>₦ {{ item.price }}</h4>
-        </li>
-        <li class="item">
-          <label for="price">Sub total</label>
-          <h4>₦ {{ item.sub_total }}</h4>
-        </li>
-        <li class="item">
-          <span
-            ><img
-              src="@/assets/img/trash.svg"
-              alt="trash icon"
-              @click="deleteItem(item.id)"
-          /></span>
-        </li>
-      </ul>
-      <ul class="total-fig">
-        <li>
-          Total quantity: <span>{{ cart.total_quantity }}</span>
-        </li>
-        <li>
-          Total amount: <span>₦ {{ cart.total_price }}</span>
-        </li>
-      </ul>
+  <div>
+    <div id="cart" class="container" v-if="cart && cart.total_quantity != 0">
+      <div class="items-container">
+        <ul v-for="(item, index) in cart.items" :key="index" class="items">
+          <li>
+            <img :src="item.image" alt="product image" />
+          </li>
+          <li class="item left-align">
+            <h3>{{ item.name | setUppercase }}</h3>
+            <p>{{ item.description | setUppercase }}</p>
+          </li>
+          <li class="item quantity">
+            <label for="price">Quantity</label>
+            <div>
+              <span>
+                <img
+                  src="@/assets/img/chevron-down.svg"
+                  alt="chevron icon"
+                  @click="remove(item.id)"
+                />
+              </span>
+              <h4>{{ item.quantity }}</h4>
+              <span>
+                <img
+                  src="@/assets/img/chevron-up.svg"
+                  alt="chevron icon"
+                  @click="add(item.id)"
+                />
+              </span>
+            </div>
+          </li>
+          <li class="item">
+            <label for="price">Unit price</label>
+            <h4>₦ {{ item.price.toLocaleString() }}</h4>
+          </li>
+          <li class="item">
+            <label for="price">Sub total</label>
+            <h4>₦ {{ item.sub_total.toLocaleString() }}</h4>
+          </li>
+          <li class="item">
+            <span
+              ><img
+                src="@/assets/img/trash.svg"
+                alt="trash icon"
+                @click="deleteItem(item.id)"
+            /></span>
+          </li>
+        </ul>
+        <ul class="total-fig">
+          <li>
+            Total quantity: <span>{{ cart.total_quantity }}</span>
+          </li>
+          <li>
+            Total amount: <span>₦ {{ cart.total_price.toLocaleString() }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <button @click="navigateTo('/shop')">Continue shopping</button>
+        <button class="checkout">Checkout</button>
+      </div>
     </div>
-    <div class="buttons">
-      <button @click="navigateTo('/shop')">Continue shopping</button>
-      <button class="checkout">Checkout</button>
-    </div>
+    <ContentLoader v-else>
+      <div class="loader" v-if="loading"></div>
+      <h3 v-if="!loading" class="loader-text">
+        Your cart is empty
+        <img src="@/assets/img/empty-cart.svg" alt="cart icon" />
+      </h3>
+    </ContentLoader>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import ContentLoader from "@/components/ContentLoader";
 import storage from "@/utils/storage.js";
 
 export default {
   name: "Cart",
+  components: {
+    ContentLoader,
+  },
   data() {
     return {};
   },
   beforeRouteEnter: (to, from, next) => {
     if (!storage.getCustomerDetails()) {
       next((vm) => {
-        vm.$router.push("/shop");
+        vm.$router.push("/login");
+        vm.showModal({
+          description: "You have to login or signup to access your cart",
+          display: true,
+          type: "info",
+        });
       });
+      return;
     } else {
+      next((vm) => {
+        vm.getCart();
+      });
       next();
     }
-  },
-  created() {
-    this.getCart();
   },
   computed: {
     ...mapState({
@@ -96,6 +115,7 @@ export default {
       "removeFromCart",
       "deleteFromCart",
     ]),
+    ...mapActions("notificationModule", ["showToast", "showModal"]),
     add(id) {
       this.addToCart({ product_id: id });
     },
@@ -117,6 +137,21 @@ export default {
 
 <style lang="scss" scoped>
 #cart {
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   .items-container {
     margin: 3rem 0 5rem 0;
 
@@ -162,7 +197,7 @@ export default {
         }
 
         p {
-          font-size: 0.8rem;
+          font-size: 0.9rem;
           line-height: 1.5;
         }
       }
