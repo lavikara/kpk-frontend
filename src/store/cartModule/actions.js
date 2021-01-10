@@ -61,7 +61,7 @@ export const resetCartCounter = ({ commit }, payload) => {
 
 export const addToCart = ({ commit }, payload) => {
   return new Promise((resolve, reject) => {
-    commit("SET_LOADING", true, { root: true });
+    commit("SET_SHOW", true, { root: true });
     api
       .addToCart(payload)
       .then(({ data }) => {
@@ -71,12 +71,12 @@ export const addToCart = ({ commit }, payload) => {
         commit("SET_CART", {
           cart: data.data.cart,
         });
-        commit("SET_LOADING", false, { root: true });
+        commit("SET_SHOW", false, { root: true });
         resolve({ data });
       })
       .catch((error) => {
         console.log(error);
-        commit("SET_LOADING", false, { root: true });
+        commit("SET_SHOW", false, { root: true });
         alert("Customer has no cart");
         localStorage.removeItem("customer_details");
         if (router.history.current.name === "Home") {
