@@ -78,6 +78,12 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/UploadProduct.vue"),
       },
+      {
+        path: "/edit-product",
+        name: "EditProduct",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/EditProduct.vue"),
+      },
     ],
   },
   {
