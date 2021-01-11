@@ -29,6 +29,9 @@ export default {
   signupVendor: (data) => {
     return axios.post(`${USER_URL}/signup-vendor`, data);
   },
+  signupRider: (data) => {
+    return axios.post(`${USER_URL}/signup-rider`, data);
+  },
   createProduct(data) {
     return axios.post(`${PRODUCT_URL}/create`, data, {
       headers: this.getVendorHeader(),
