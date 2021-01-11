@@ -5,7 +5,9 @@ import ShopLayout from "../layouts/ShopLayout.vue";
 import VendorLayout from "../layouts/VendorLayout.vue";
 import CustomerOnboardingLayout from "../layouts/CustomerOnboardingLayout.vue";
 import VendorOnboardingLayout from "../layouts/VendorOnboardingLayout.vue";
-import CustomerAuthLayout from "../layouts/CustomerAuthLayout.vue";
+import CustomerLayout from "../layouts/CustomerLayout.vue";
+import RiderLayout from "../layouts/RiderLayout.vue";
+import RiderOnboardingLayout from "../layouts/RiderOnboardingLayout.vue";
 
 Vue.use(VueRouter);
 
@@ -24,7 +26,7 @@ const routes = [
   },
   {
     path: "/",
-    component: CustomerAuthLayout,
+    component: CustomerLayout,
     children: [
       {
         path: "/customer-account",
@@ -84,6 +86,30 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/EditProduct.vue"),
       },
+      {
+        path: "/confirm-payment",
+        name: "VendorPayment",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/VendorPayment.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: RiderLayout,
+    children: [
+      {
+        path: "/rider-home",
+        name: "RiderHome",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/RiderHome.vue"),
+      },
+      {
+        path: "/rider-dashboard",
+        name: "RiderDashboard",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/RiderDashboard.vue"),
+      },
     ],
   },
   {
@@ -119,6 +145,24 @@ const routes = [
         name: "VendorLogin",
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/VendorLogin.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
+    component: RiderOnboardingLayout,
+    children: [
+      {
+        path: "/rider-signup",
+        name: "RiderSignup",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/RiderSignup.vue"),
+      },
+      {
+        path: "/rider-login",
+        name: "RiderLogin",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/RiderLogin.vue"),
       },
     ],
   },

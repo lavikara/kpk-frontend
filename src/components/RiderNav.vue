@@ -7,15 +7,15 @@
         /></a>
       </h1>
       <div class="links">
-        <ul v-if="!vendorDetails">
+        <ul v-if="!riderDetails">
           <li>
-            <router-link to="/vendor-login">Login</router-link>
+            <router-link to="/rider-login">Login</router-link>
           </li>
           <li>
-            <router-link to="/vendor-signup">Signup</router-link>
+            <router-link to="/rider-signup">Signup</router-link>
           </li>
         </ul>
-        <ul v-if="vendorDetails && initials">
+        <ul v-if="riderDetails && initials">
           <li>{{ initials | nameShortenString | setUppercase }}</li>
           <li @click="logout">
             Logout
@@ -23,7 +23,7 @@
         </ul>
       </div>
     </div>
-    <div v-if="vendorDetails && approved" class="category-nav">
+    <div class="category-nav" v-if="riderDetails">
       <div class="links container">
         <ul class="left-side">
           <router-link to="/vendor-dashboard">
@@ -34,10 +34,7 @@
         </ul>
         <ul class="right-side">
           <li>
-            <router-link to="/upload-product">Upload product</router-link>
-          </li>
-          <li>
-            <router-link to="/edit-product">Edit product</router-link>
+            <router-link to="/upload-product">Assigned shops</router-link>
           </li>
         </ul>
       </div>
@@ -50,16 +47,15 @@ import { mapActions, mapState } from "vuex";
 import storage from "@/utils/storage.js";
 
 export default {
-  name: "VendorNav",
+  name: "RiderNav",
   data() {
     return {
-      vendorDetails: storage.getVendorDetails(),
+      riderDetails: storage.getRiderDetails(),
       initials: "",
-      approved: "",
     };
   },
   mounted() {
-    if (!this.vendorDetails) {
+    if (!this.riderDetails) {
       return;
     }
     this.getInitials();
@@ -67,14 +63,13 @@ export default {
   computed: {},
   methods: {
     getInitials() {
-      if (this.vendorDetails) {
-        const firstName = this.vendorDetails.user.business_name;
-        this.initials = firstName;
-        this.approved = this.vendorDetails.user.vendor_status;
+      if (this.riderDetails) {
+        const companyName = this.riderDetails.user.company_name;
+        this.initials = companyName;
       }
     },
     logout() {
-      localStorage.removeItem("vendor_details");
+      localStorage.removeItem("rider_details");
       this.$router.push("/");
     },
   },

@@ -6,6 +6,10 @@ export const CLEAR_CUSTOMER_DETAILS = (state, payload) => {
   state.signupCustomer = payload.signupCustomer;
 };
 
+export const CLEAR_RIDER_DETAILS = (state, payload) => {
+  state.signupRider = payload.signupRider;
+};
+
 export const CLEAR_LOGIN_DETAILS = (state, payload) => {
   state.loginDetails = payload.loginDetails;
 };
@@ -39,11 +43,14 @@ export const VALIDATE_INPUT = (state, payload) => {
     case "State *":
       state.formValidation.address.state = payload.invalid;
       break;
-    case "CAC number *":
-      state.formValidation.cac_number = payload.invalid;
-      break;
     case "Business name *":
       state.formValidation.business_name = payload.invalid;
+      break;
+    case "Account number *":
+      state.formValidation.account_number = payload.invalid;
+      break;
+    case "Company name *":
+      state.formValidation.company_name = payload.invalid;
       break;
 
     default:

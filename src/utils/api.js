@@ -5,6 +5,7 @@ const BASE_URL = process.env.VUE_APP_BASE_URL;
 const USER_URL = `${BASE_URL}/user`;
 const PRODUCT_URL = `${BASE_URL}/product`;
 const CART_URL = `${BASE_URL}/cart`;
+const PAYMENT_URL = `${BASE_URL}/payment`;
 
 export default {
   getVendorHeader() {
@@ -19,6 +20,12 @@ export default {
     };
     return header;
   },
+  getRiderToken() {
+    let header = {
+      Authorization: "bearer " + storage.getRiderToken(),
+    };
+    return header;
+  },
   login: (data) => {
     return axios.post(`${USER_URL}/login`, data);
   },
@@ -27,6 +34,9 @@ export default {
   },
   signupVendor: (data) => {
     return axios.post(`${USER_URL}/signup-vendor`, data);
+  },
+  signupRider: (data) => {
+    return axios.post(`${USER_URL}/signup-rider`, data);
   },
   createProduct(data) {
     return axios.post(`${PRODUCT_URL}/create`, data, {
@@ -57,6 +67,11 @@ export default {
   deleteFromCart(data) {
     return axios.post(`${CART_URL}/delete-from-cart`, data, {
       headers: this.getCustomerToken(),
+    });
+  },
+  generateVendorPaymentLink(data) {
+    return axios.post(`${PAYMENT_URL}/generate`, data, {
+      headers: this.getVendorHeader(),
     });
   },
 };

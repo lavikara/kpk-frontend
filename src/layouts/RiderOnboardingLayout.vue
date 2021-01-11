@@ -1,17 +1,17 @@
 <template>
   <div>
-    <ShopNav />
+    <RiderNav />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ShopNav from "@/components/ShopNav.vue";
+import RiderNav from "@/components/RiderNav.vue";
 
 export default {
-  name: "CustomerOnboardingLayout",
+  name: "RiderOnboardingLayout",
   components: {
-    ShopNav,
+    RiderNav,
   },
   data() {
     return {};

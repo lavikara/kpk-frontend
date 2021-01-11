@@ -8,7 +8,7 @@
 import ShopNav from "@/components/ShopNav.vue";
 
 export default {
-  name: "CustomerAuthLayout",
+  name: "CustomerLayout",
   components: {
     ShopNav,
   },

@@ -93,22 +93,22 @@
         </div>
         <div class="input-container form-section">
           <div>
-            <label for="business name">Business name</label>
+            <label for="company name">Company name</label>
             <input
               type="text"
-              name="businessname"
-              v-model="details.business_name"
+              name="companyname"
+              v-model="details.company_name"
               @focus="resetInputValidation"
               @blur="validateInput"
-              placeholder="Business name *"
+              placeholder="Company name *"
               class="input-field"
               :class="{
-                invalid: formValidation.business_name === true,
+                invalid: formValidation.company_name === true,
               }"
               required
             />
             <transition name="fade">
-              <span v-if="formValidation.business_name"
+              <span v-if="formValidation.company_name"
                 >Field can't be empty</span
               >
             </transition>
@@ -117,10 +117,11 @@
             <label for="account number">Account number</label>
             <input
               type="tel"
-              name="accountnumber"
+              name="accountname"
               v-model="details.account_number"
               @focus="resetInputValidation"
               @blur="validateInput"
+              @keypress="isNumber($event)"
               placeholder="Account number *"
               class="input-field"
               :class="{
@@ -259,19 +260,19 @@
 import { mapActions, mapState } from "vuex";
 
 export default {
-  name: "VendorSignup",
+  name: "RiderSignup",
   data() {
     return {};
   },
   computed: {
     ...mapState({
       loading: (state) => state.loading,
-      details: (state) => state.accountModule.signupVendor,
+      details: (state) => state.accountModule.signupRider,
       formValidation: (state) => state.accountModule.formValidation,
     }),
   },
   methods: {
-    ...mapActions("accountModule", ["signupVendor", "validate"]),
+    ...mapActions("accountModule", ["signupRider", "validate"]),
     ...mapActions("notificationModule", ["showModal"]),
 
     signup() {
@@ -283,7 +284,7 @@ export default {
         });
       } else {
         delete this.details.confirmPassword;
-        this.signupVendor(this.details);
+        this.signupRider(this.details);
       }
     },
 
@@ -394,10 +395,10 @@ export default {
             this.validate({ field: field, invalid: false });
           }
           break;
-        case "Business name *":
+        case "Company name *":
           if (
-            this.details.business_name.length === 0 ||
-            !this.details.business_name.trim()
+            this.details.company_name.length === 0 ||
+            !this.details.company_name.trim()
           ) {
             this.validate({ field: field, invalid: true });
           } else {
