@@ -20,6 +20,12 @@ export default {
     };
     return header;
   },
+  getRiderToken() {
+    let header = {
+      Authorization: "bearer " + storage.getRiderToken(),
+    };
+    return header;
+  },
   login: (data) => {
     return axios.post(`${USER_URL}/login`, data);
   },
