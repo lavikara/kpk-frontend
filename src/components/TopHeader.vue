@@ -8,7 +8,9 @@
         <router-link to="/vendor-home" class="vendor-signup-btn"
           >Vendors</router-link
         >
-        <router-link to="#" class="vendor-signup-btn">Riders</router-link>
+        <router-link to="/rider-home" class="vendor-signup-btn"
+          >Riders</router-link
+        >
       </div>
       <div class="right-side">
         <ul>
