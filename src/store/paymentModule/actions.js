@@ -51,7 +51,7 @@ export const paymentDetails = ({ commit }, payload) => {
       title: "Vendor registration",
       description: "Vendor registration fee",
       logo:
-        "https://res.cloudinary.com/temikara/image/upload/v1610295591/trolley_nxdyuy.svg",
+        "https://res.cloudinary.com/temikara/image/upload/v1610364968/istockphoto-1206806317-612x612_sscwyi.jpg",
     },
   });
 };
