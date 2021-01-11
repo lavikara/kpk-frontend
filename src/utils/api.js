@@ -5,6 +5,7 @@ const BASE_URL = process.env.VUE_APP_BASE_URL;
 const USER_URL = `${BASE_URL}/user`;
 const PRODUCT_URL = `${BASE_URL}/product`;
 const CART_URL = `${BASE_URL}/cart`;
+const PAYMENT_URL = `${BASE_URL}/payment`;
 
 export default {
   getVendorHeader() {
@@ -57,6 +58,11 @@ export default {
   deleteFromCart(data) {
     return axios.post(`${CART_URL}/delete-from-cart`, data, {
       headers: this.getCustomerToken(),
+    });
+  },
+  generateVendorPaymentLink(data) {
+    return axios.post(`${PAYMENT_URL}/generate`, data, {
+      headers: this.getVendorHeader(),
     });
   },
 };
