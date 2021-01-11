@@ -114,22 +114,24 @@
             </transition>
           </div>
           <div>
-            <label for="cac number">CAC number</label>
+            <label for="account number">Account number</label>
             <input
-              type="text"
-              name="cacnumber"
-              v-model="details.cac_number"
+              type="tel"
+              name="accountnumber"
+              v-model="details.account_number"
               @focus="resetInputValidation"
               @blur="validateInput"
-              placeholder="CAC number *"
+              placeholder="Account number *"
               class="input-field"
               :class="{
-                invalid: formValidation.cac_number === true,
+                invalid: formValidation.account_number === true,
               }"
               required
             />
             <transition name="fade">
-              <span v-if="formValidation.cac_number">field can't be empty</span>
+              <span v-if="formValidation.account_number"
+                >field can't be empty</span
+              >
             </transition>
           </div>
         </div>
@@ -382,10 +384,10 @@ export default {
             this.validate({ field: field, invalid: false });
           }
           break;
-        case "CAC number *":
+        case "Account number *":
           if (
-            this.details.cac_number.length === 0 ||
-            !this.details.cac_number.trim()
+            this.details.account_number.length === 0 ||
+            !this.details.account_number.trim()
           ) {
             this.validate({ field: field, invalid: true });
           } else {
