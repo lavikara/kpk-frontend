@@ -16,7 +16,22 @@ export default {
       state: "",
     },
     business_name: "",
-    cac_number: "",
+    account_number: "",
+  },
+  signupRider: {
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone_number: "",
+    address: {
+      street: "",
+      lga: "",
+      state: "",
+    },
+    company_name: "",
+    account_number: "",
   },
   signupCustomer: {
     first_name: "",
@@ -43,7 +58,8 @@ export default {
       state: false,
     },
     business_name: false,
-    cac_number: false,
+    company_name: false,
+    account_number: false,
     confirmPassword: false,
   },
 };
