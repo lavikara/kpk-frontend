@@ -7,7 +7,7 @@
         /></a>
       </h1>
       <div class="links">
-        <ul v-if="!isLoggedIn">
+        <ul v-if="!vendorDetails">
           <li>
             <router-link to="/vendor-login">Login</router-link>
           </li>
@@ -15,7 +15,7 @@
             <router-link to="/vendor-signup">Signup</router-link>
           </li>
         </ul>
-        <ul v-if="isLoggedIn && initials">
+        <ul v-if="vendorDetails && initials">
           <li>{{ initials | nameShortenString | setUppercase }}</li>
           <li @click="logout">
             Logout
@@ -23,7 +23,7 @@
         </ul>
       </div>
     </div>
-    <div v-if="isLoggedIn" class="category-nav">
+    <div v-if="vendorDetails && approved" class="category-nav">
       <div class="links container">
         <ul class="left-side">
           <router-link to="/vendor-dashboard">
@@ -53,12 +53,13 @@ export default {
   name: "VendorNav",
   data() {
     return {
-      isLoggedIn: storage.getVendorDetails(),
+      vendorDetails: storage.getVendorDetails(),
       initials: "",
+      approved: "",
     };
   },
   mounted() {
-    if (!this.isLoggedIn) {
+    if (!this.vendorDetails) {
       return;
     }
     this.getInitials();
@@ -66,13 +67,14 @@ export default {
   computed: {},
   methods: {
     getInitials() {
-      if (this.isLoggedIn) {
-        const firstName = this.isLoggedIn.user.business_name;
+      if (this.vendorDetails) {
+        const firstName = this.vendorDetails.user.business_name;
         this.initials = firstName;
+        this.approved = this.vendorDetails.user.vendor_status;
       }
     },
     logout() {
-      localStorage.clear();
+      localStorage.removeItem("vendor_details");
       this.$router.push("/");
     },
   },
