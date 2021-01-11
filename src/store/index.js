@@ -11,6 +11,7 @@ import accountModule from "./accountModule/index";
 import productModule from "./productModule/index";
 import cartModule from "./cartModule/index";
 import notificationModule from "./notificationModule/index";
+import paymentModule from "./paymentModule/index";
 
 export default new Vuex.Store({
   state,
@@ -22,5 +23,6 @@ export default new Vuex.Store({
     productModule,
     cartModule,
     notificationModule,
+    paymentModule,
   },
 });
