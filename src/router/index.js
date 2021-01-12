@@ -33,26 +33,26 @@ const routes = [
         name: "CustomerAccount",
         component: () =>
           import(
-            /* webpackChunkName: "about" */ "../views/CustomerAccount.vue"
+            /* webpackChunkName: "customer" */ "../views/CustomerAccount.vue"
           ),
       },
       {
         path: "/shop",
         name: "Shop",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/Shop.vue"),
+          import(/* webpackChunkName: "customer" */ "../views/Shop.vue"),
       },
       {
         path: "/product/:slug/id/:id",
         name: "ProductView",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/ProductView.vue"),
+          import(/* webpackChunkName: "customer" */ "../views/ProductView.vue"),
       },
       {
         path: "/cart",
         name: "Cart",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/Cart.vue"),
+          import(/* webpackChunkName: "customer" */ "../views/Cart.vue"),
       },
     ],
   },
@@ -64,33 +64,39 @@ const routes = [
         path: "/vendor-home",
         name: "VendorHome",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/VendorHome.vue"),
+          import(/* webpackChunkName: "vendor" */ "../views/VendorHome.vue"),
       },
       {
         path: "/vendor-dashboard",
         name: "VendorDashboard",
         component: () =>
           import(
-            /* webpackChunkName: "about" */ "../views/VendorDashboard.vue"
+            /* webpackChunkName: "vendor" */ "../views/VendorDashboard.vue"
           ),
       },
       {
         path: "/upload-product",
         name: "UploadProduct",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/UploadProduct.vue"),
+          import(/* webpackChunkName: "vendor" */ "../views/UploadProduct.vue"),
       },
       {
         path: "/edit-product",
         name: "EditProduct",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/EditProduct.vue"),
+          import(/* webpackChunkName: "vendor" */ "../views/EditProduct.vue"),
       },
       {
         path: "/confirm-payment",
         name: "VendorPayment",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/VendorPayment.vue"),
+          import(/* webpackChunkName: "vendor" */ "../views/VendorPayment.vue"),
+      },
+      {
+        path: "/dispatch",
+        name: "Dispatch",
+        component: () =>
+          import(/* webpackChunkName: "vendor" */ "../views/Dispatch.vue"),
       },
     ],
   },
@@ -102,13 +108,19 @@ const routes = [
         path: "/rider-home",
         name: "RiderHome",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/RiderHome.vue"),
+          import(/* webpackChunkName: "rider" */ "../views/RiderHome.vue"),
       },
       {
         path: "/rider-dashboard",
         name: "RiderDashboard",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/RiderDashboard.vue"),
+          import(/* webpackChunkName: "rider" */ "../views/RiderDashboard.vue"),
+      },
+      {
+        path: "/asigned-shops",
+        name: "AsignedShops",
+        component: () =>
+          import(/* webpackChunkName: "rider" */ "../views/AsignedShops.vue"),
       },
     ],
   },
@@ -120,13 +132,17 @@ const routes = [
         path: "/signup",
         name: "CustomerSignup",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/CustomerSignup.vue"),
+          import(
+            /* webpackChunkName: "onboard" */ "../views/CustomerSignup.vue"
+          ),
       },
       {
         path: "/login",
         name: "CustomerLogin",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/CustomerLogin.vue"),
+          import(
+            /* webpackChunkName: "onboard" */ "../views/CustomerLogin.vue"
+          ),
       },
     ],
   },
@@ -138,13 +154,13 @@ const routes = [
         path: "/vendor-signup",
         name: "VendorSignup",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/VendorSignup.vue"),
+          import(/* webpackChunkName: "onboard" */ "../views/VendorSignup.vue"),
       },
       {
         path: "/vendor-login",
         name: "VendorLogin",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/VendorLogin.vue"),
+          import(/* webpackChunkName: "onboard" */ "../views/VendorLogin.vue"),
       },
     ],
   },
@@ -156,13 +172,13 @@ const routes = [
         path: "/rider-signup",
         name: "RiderSignup",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/RiderSignup.vue"),
+          import(/* webpackChunkName: "onboard" */ "../views/RiderSignup.vue"),
       },
       {
         path: "/rider-login",
         name: "RiderLogin",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/RiderLogin.vue"),
+          import(/* webpackChunkName: "onboard" */ "../views/RiderLogin.vue"),
       },
     ],
   },
