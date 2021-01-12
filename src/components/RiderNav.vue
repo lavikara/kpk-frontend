@@ -26,7 +26,7 @@
     <div class="category-nav" v-if="riderDetails">
       <div class="links container">
         <ul class="left-side">
-          <router-link to="/vendor-dashboard">
+          <router-link to="/rider-dashboard">
             <li>
               Dashboard
               <img src="@/assets/img/menu.svg" alt="return icon" /></li
@@ -34,7 +34,7 @@
         </ul>
         <ul class="right-side">
           <li>
-            <router-link to="/upload-product">Assigned shops</router-link>
+            <router-link to="/asigned-shops">Assigned shops</router-link>
           </li>
         </ul>
       </div>
