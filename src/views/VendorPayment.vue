@@ -19,7 +19,8 @@ export default {
       next((vm) => {
         localStorage.removeItem("vendor_details");
         vm.showModal({
-          description: "Please login to complete the process.",
+          description:
+            "Payment successful, please login to complete the process.",
           display: true,
           type: "info",
         });
