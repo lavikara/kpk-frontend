@@ -15,7 +15,6 @@ export default {
     };
   },
   beforeRouteEnter: (to, from, next) => {
-    console.log(to.query.status);
     if (to.query.status === "successful") {
       next((vm) => {
         localStorage.removeItem("vendor_details");
