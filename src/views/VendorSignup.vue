@@ -271,7 +271,7 @@ export default {
     }),
   },
   methods: {
-    ...mapActions("accountModule", ["signupVendor", "validate"]),
+    ...mapActions("authModule", ["signupVendor", "validate"]),
     ...mapActions("notificationModule", ["showModal"]),
 
     signup() {
