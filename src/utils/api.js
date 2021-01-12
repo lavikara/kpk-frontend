@@ -14,13 +14,13 @@ export default {
     };
     return header;
   },
-  getCustomerToken() {
+  getCustomerHeader() {
     let header = {
       Authorization: "bearer " + storage.getCustomerToken(),
     };
     return header;
   },
-  getRiderToken() {
+  getRiderHeader() {
     let header = {
       Authorization: "bearer " + storage.getRiderToken(),
     };
@@ -43,34 +43,52 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  selectDispatch(data) {
+    return axios.post(`${USER_URL}/assign-rider`, data, {
+      headers: this.getVendorHeader(),
+    });
+  },
+  removeDispatch(data) {
+    return axios.post(`${USER_URL}/unassign-rider`, data, {
+      headers: this.getVendorHeader(),
+    });
+  },
   getAllProducts: () => {
     return axios.get(`${PRODUCT_URL}/get-all-product`);
+  },
+  getAllriders: () => {
+    return axios.get(`${USER_URL}/get-all-riders`);
   },
   getProductById: (id) => {
     return axios.get(`${PRODUCT_URL}`, { params: { id } });
   },
   getCart() {
     return axios.get(`${CART_URL}/get-cart`, {
-      headers: this.getCustomerToken(),
+      headers: this.getCustomerHeader(),
     });
   },
   addToCart(data) {
     return axios.post(`${CART_URL}/add-to-cart`, data, {
-      headers: this.getCustomerToken(),
+      headers: this.getCustomerHeader(),
     });
   },
   removeFromCart(data) {
     return axios.post(`${CART_URL}/remove-from-cart`, data, {
-      headers: this.getCustomerToken(),
+      headers: this.getCustomerHeader(),
     });
   },
   deleteFromCart(data) {
     return axios.post(`${CART_URL}/delete-from-cart`, data, {
-      headers: this.getCustomerToken(),
+      headers: this.getCustomerHeader(),
     });
   },
   generateVendorPaymentLink(data) {
     return axios.post(`${PAYMENT_URL}/generate`, data, {
+      headers: this.getVendorHeader(),
+    });
+  },
+  getVendorById(id) {
+    return axios.get(`${USER_URL}/get-single-vendor/?id=${id}`, {
       headers: this.getVendorHeader(),
     });
   },
