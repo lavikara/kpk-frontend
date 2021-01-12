@@ -51,11 +51,11 @@ export default {
   computed: {
     ...mapState({
       loading: (state) => state.loading,
-      details: (state) => state.accountModule.loginDetails,
+      details: (state) => state.authModule.loginDetails,
     }),
   },
   methods: {
-    ...mapActions("accountModule", ["loginCustomer"]),
+    ...mapActions("authModule", ["loginCustomer"]),
     login() {
       this.loginCustomer(this.details);
     },

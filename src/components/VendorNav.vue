@@ -34,6 +34,9 @@
         </ul>
         <ul class="right-side">
           <li>
+            <router-link to="/dispatch">Dispatch</router-link>
+          </li>
+          <li>
             <router-link to="/upload-product">Upload product</router-link>
           </li>
           <li>
