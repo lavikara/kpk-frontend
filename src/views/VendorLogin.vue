@@ -49,11 +49,11 @@ export default {
   computed: {
     ...mapState({
       loading: (state) => state.loading,
-      details: (state) => state.accountModule.loginDetails,
+      details: (state) => state.authModule.loginDetails,
     }),
   },
   methods: {
-    ...mapActions("accountModule", ["loginVendor"]),
+    ...mapActions("authModule", ["loginVendor"]),
     login() {
       this.loginVendor(this.details);
     },

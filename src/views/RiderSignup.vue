@@ -267,12 +267,12 @@ export default {
   computed: {
     ...mapState({
       loading: (state) => state.loading,
-      details: (state) => state.accountModule.signupRider,
-      formValidation: (state) => state.accountModule.formValidation,
+      details: (state) => state.authModule.signupRider,
+      formValidation: (state) => state.authModule.formValidation,
     }),
   },
   methods: {
-    ...mapActions("accountModule", ["signupRider", "validate"]),
+    ...mapActions("authModule", ["signupRider", "validate"]),
     ...mapActions("notificationModule", ["showModal"]),
 
     signup() {

@@ -7,7 +7,7 @@ import state from "./state";
 import * as getters from "./getters";
 import * as mutations from "./mutations";
 import * as actions from "./actions";
-import accountModule from "./accountModule/index";
+import authModule from "./authModule/index";
 import productModule from "./productModule/index";
 import cartModule from "./cartModule/index";
 import notificationModule from "./notificationModule/index";
@@ -19,7 +19,7 @@ export default new Vuex.Store({
   mutations,
   actions,
   modules: {
-    accountModule,
+    authModule,
     productModule,
     cartModule,
     notificationModule,
