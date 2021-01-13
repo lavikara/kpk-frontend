@@ -20,7 +20,7 @@ export default {
         localStorage.removeItem("vendor_details");
         vm.showModal({
           description:
-            "Payment successful, please login to complete the process.",
+            "Payment successful, please login and select dispatch to complete the process.",
           display: true,
           type: "info",
         });

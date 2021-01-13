@@ -34,7 +34,7 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
                 state: "",
               },
               business_name: "",
-              account_number: "",
+              country: "",
             },
           });
           commit("SET_LOADING", false, { root: true });
@@ -46,7 +46,7 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
         dispatch(
           "notificationModule/showToast",
           {
-            description: "Email or Phone number already exist",
+            description: "An error occured",
             display: true,
             type: "error",
           },
@@ -89,8 +89,8 @@ export const signupRider = ({ commit, dispatch }, payload) => {
                 lga: "",
                 state: "",
               },
-              rider_license: "",
-              account_number: "",
+              company_name: "",
+              country: "",
             },
           });
           commit("SET_LOADING", false, { root: true });
@@ -102,7 +102,7 @@ export const signupRider = ({ commit, dispatch }, payload) => {
         dispatch(
           "notificationModule/showToast",
           {
-            description: "Email or Phone number already exist",
+            description: "An error occured",
             display: true,
             type: "error",
           },
@@ -156,13 +156,13 @@ export const signupCustomer = ({ commit, dispatch }, payload) => {
         dispatch(
           "notificationModule/showToast",
           {
-            description: "Email or Phone number already exist",
+            description: "An error occured",
             display: true,
             type: "error",
           },
           { root: true }
         );
-        router.push("/");
+        // router.push("/");
         reject({ data });
       });
   });

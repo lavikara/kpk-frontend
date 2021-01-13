@@ -114,26 +114,20 @@
             </transition>
           </div>
           <div>
-            <label for="account number">Account number</label>
-            <input
-              type="tel"
-              name="accountname"
-              v-model="details.account_number"
-              @focus="resetInputValidation"
-              @blur="validateInput"
-              @keypress="isNumber($event)"
-              placeholder="Account number *"
-              class="input-field"
-              :class="{
-                invalid: formValidation.account_number === true,
-              }"
+            <label for="country">Country</label>
+            <select
+              class="input-field select"
+              v-model="details.country"
               required
-            />
-            <transition name="fade">
-              <span v-if="formValidation.account_number"
-                >field can't be empty</span
-              >
-            </transition>
+            >
+              <option disabled value="">Select country</option>
+              <option>Nigeria</option>
+              <option>Kenya</option>
+              <option>Ghana</option>
+              <option>Uganda</option>
+              <option>South Africa</option>
+              <option>Tanzania</option>
+            </select>
           </div>
         </div>
         <div class="input-container">
@@ -282,6 +276,7 @@ export default {
           display: true,
           type: "info",
         });
+        location.reload();
       } else {
         delete this.details.confirmPassword;
         this.signupRider(this.details);
@@ -379,16 +374,6 @@ export default {
           if (
             this.details.address.state.length === 0 ||
             !this.details.address.state.trim()
-          ) {
-            this.validate({ field: field, invalid: true });
-          } else {
-            this.validate({ field: field, invalid: false });
-          }
-          break;
-        case "Account number *":
-          if (
-            this.details.account_number.length === 0 ||
-            !this.details.account_number.trim()
           ) {
             this.validate({ field: field, invalid: true });
           } else {

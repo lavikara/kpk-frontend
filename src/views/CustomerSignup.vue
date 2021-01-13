@@ -238,6 +238,7 @@ export default {
           display: true,
           type: "info",
         });
+        location.reload();
       } else {
         delete this.details.confirmPassword;
         this.signupCustomer(this.details);

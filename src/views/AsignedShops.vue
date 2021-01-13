@@ -1,8 +1,6 @@
 <template>
   <div di="dispatch" class="container">
-    <ul>
-      <li></li>
-    </ul>
+    <h1>hello from assigned shops</h1>
   </div>
 </template>
 
@@ -15,7 +13,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-#dispatch {
-}
-</style>
+<style lang="scss" scoped></style>

@@ -16,7 +16,7 @@ export default {
       state: "",
     },
     business_name: "",
-    account_number: "",
+    country: "",
   },
   signupRider: {
     first_name: "",
@@ -31,7 +31,7 @@ export default {
       state: "",
     },
     company_name: "",
-    account_number: "",
+    country: "",
   },
   signupCustomer: {
     first_name: "",
@@ -59,7 +59,9 @@ export default {
     },
     business_name: false,
     company_name: false,
-    account_number: false,
     confirmPassword: false,
+    account_number: false,
+    business_mobile: false,
+    business_email: false,
   },
 };
