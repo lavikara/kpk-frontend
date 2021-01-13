@@ -19,7 +19,7 @@
             <h3 class="number">0{{ rider.phone_number }}</h3>
             <h3 class="email">{{ rider.email }}</h3>
             <button @click="removeDispatch(rider._id)">
-              Delete dispatch
+              Remove dispatch
             </button>
           </li>
         </ul>
