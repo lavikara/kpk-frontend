@@ -92,4 +92,17 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  getBankList(country) {
+    return axios.post(`${PAYMENT_URL}/bank-list`, { country });
+  },
+  createRiderSubAccount(data) {
+    return axios.post(`${PAYMENT_URL}/rider-sub-account`, data, {
+      headers: this.getRiderHeader(),
+    });
+  },
+  createVendorSubAccount(data) {
+    return axios.post(`${PAYMENT_URL}/vendor-sub-account`, data, {
+      headers: this.getVendorHeader(),
+    });
+  },
 };
