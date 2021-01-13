@@ -23,7 +23,7 @@
         </ul>
       </div>
     </div>
-    <div class="category-nav" v-if="riderDetails">
+    <div class="category-nav" v-if="riderDetails && approved">
       <div class="links container">
         <ul class="left-side">
           <router-link to="/rider-dashboard">
@@ -52,6 +52,7 @@ export default {
     return {
       riderDetails: storage.getRiderDetails(),
       initials: "",
+      approved: "",
     };
   },
   mounted() {
@@ -66,6 +67,7 @@ export default {
       if (this.riderDetails) {
         const companyName = this.riderDetails.user.company_name;
         this.initials = companyName;
+        this.approved = this.riderDetails.user.rider_status;
       }
     },
     logout() {
