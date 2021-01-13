@@ -8,7 +8,7 @@
 import storage from "@/utils/storage.js";
 
 export default {
-  name: "TopNav",
+  name: "VendorHome",
   data() {
     return {};
   },
