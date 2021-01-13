@@ -114,30 +114,30 @@
             </transition>
           </div>
           <div>
-            <label for="account number">Account number</label>
+            <label for="state">State</label>
             <input
-              type="tel"
-              name="accountnumber"
-              v-model="details.account_number"
+              type="text"
+              name="state"
+              v-model="details.address.state"
               @focus="resetInputValidation"
               @blur="validateInput"
-              placeholder="Account number *"
+              placeholder="State *"
               class="input-field"
               :class="{
-                invalid: formValidation.account_number === true,
+                invalid: formValidation.address.state === true,
               }"
               required
             />
             <transition name="fade">
-              <span v-if="formValidation.account_number"
-                >field can't be empty</span
+              <span v-if="formValidation.address.state"
+                >Field cant be empty</span
               >
             </transition>
           </div>
         </div>
         <div class="input-container">
           <div>
-            <label for="street" class="address-label">Street</label>
+            <label for="street">Street</label>
             <input
               type="text"
               name="street"
@@ -145,7 +145,7 @@
               @focus="resetInputValidation"
               @blur="validateInput"
               placeholder="Street *"
-              class="input-field address"
+              class="input-field"
               :class="{
                 invalid: formValidation.address.street === true,
               }"
@@ -158,7 +158,7 @@
             </transition>
           </div>
           <div>
-            <label for="lga" class="address-label">LGA</label>
+            <label for="lga">LGA</label>
             <input
               type="text"
               name="lga"
@@ -166,7 +166,7 @@
               @focus="resetInputValidation"
               @blur="validateInput"
               placeholder="LGA *"
-              class="input-field address"
+              class="input-field"
               :class="{
                 invalid: formValidation.address.lga === true,
               }"
@@ -174,27 +174,6 @@
             />
             <transition name="fade">
               <span v-if="formValidation.address.lga">Field cant be empty</span>
-            </transition>
-          </div>
-          <div>
-            <label for="state" class="address-label">State</label>
-            <input
-              type="text"
-              name="state"
-              v-model="details.address.state"
-              @focus="resetInputValidation"
-              @blur="validateInput"
-              placeholder="State *"
-              class="input-field address"
-              :class="{
-                invalid: formValidation.address.state === true,
-              }"
-              required
-            />
-            <transition name="fade">
-              <span v-if="formValidation.address.state"
-                >Field cant be empty</span
-              >
             </transition>
           </div>
         </div>
@@ -378,16 +357,6 @@ export default {
           if (
             this.details.address.state.length === 0 ||
             !this.details.address.state.trim()
-          ) {
-            this.validate({ field: field, invalid: true });
-          } else {
-            this.validate({ field: field, invalid: false });
-          }
-          break;
-        case "Account number *":
-          if (
-            this.details.account_number.length === 0 ||
-            !this.details.account_number.trim()
           ) {
             this.validate({ field: field, invalid: true });
           } else {

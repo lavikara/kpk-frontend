@@ -37,10 +37,6 @@
             margin-left: 1rem;
           }
 
-          .address-label {
-            margin-left: 1.4rem;
-          }
-
           .input-field {
             width: 90%;
             color: var(--cyanBlue);
@@ -59,10 +55,6 @@
           width: 49%;
           @media screen and (max-width: 600px) {
             width: 100%;
-          }
-
-          .address {
-            width: 81%;
           }
 
           .invalid {

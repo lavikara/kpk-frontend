@@ -46,9 +46,6 @@ export const VALIDATE_INPUT = (state, payload) => {
     case "Business name *":
       state.formValidation.business_name = payload.invalid;
       break;
-    case "Account number *":
-      state.formValidation.account_number = payload.invalid;
-      break;
     case "Company name *":
       state.formValidation.company_name = payload.invalid;
       break;
