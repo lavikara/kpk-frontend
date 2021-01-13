@@ -89,7 +89,7 @@ export default {
     ]),
     ...mapActions("notificationModule", ["showToast"]),
     selectDispatch(id) {
-      if (this.vendorDetails.asigned_riders.length === 3) {
+      if (this.vendorDetails.asigned_riders.length === 1) {
         this.showToast({
           description: "Maximum riders selected",
           display: true,
