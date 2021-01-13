@@ -8,7 +8,8 @@
       v-if="vendorDetails.vendor_status === false"
     >
       <h1>
-        Your shop has not been approved, please pay registration fee.
+        Your shop has not been approved, please pay registration fee,<br />
+        and select dispatch.
       </h1>
       <button @click="pay">
         Pay<span class="loader" v-if="loading"></span>
@@ -93,16 +94,22 @@ export default {
   }
 
   .approve-div {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     h1 {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 1.2rem;
+      line-height: 1.5;
     }
   }
   button {
     position: relative;
     display: flex;
     align-items: center;
-    margin: auto;
+    margin: 0 auto;
     background: var(--cyanBlue);
     border-radius: 5px;
     padding: 0.5rem 2rem;
