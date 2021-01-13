@@ -87,6 +87,12 @@ const routes = [
           import(/* webpackChunkName: "vendor" */ "../views/EditProduct.vue"),
       },
       {
+        path: "/vendor-account",
+        name: "VendorAccount",
+        component: () =>
+          import(/* webpackChunkName: "vendor" */ "../views/VendorAccount.vue"),
+      },
+      {
         path: "/confirm-payment",
         name: "VendorPayment",
         component: () =>
@@ -121,6 +127,12 @@ const routes = [
         name: "AsignedShops",
         component: () =>
           import(/* webpackChunkName: "rider" */ "../views/AsignedShops.vue"),
+      },
+      {
+        path: "/rider-account",
+        name: "RiderAccount",
+        component: () =>
+          import(/* webpackChunkName: "rider" */ "../views/RiderAccount.vue"),
       },
     ],
   },
