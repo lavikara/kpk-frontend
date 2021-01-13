@@ -59,7 +59,7 @@ export const resetCartCounter = ({ commit }, payload) => {
   });
 };
 
-export const addToCart = ({ commit }, payload) => {
+export const addToCart = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_SHOW", true, { root: true });
     api
@@ -71,6 +71,15 @@ export const addToCart = ({ commit }, payload) => {
         commit("SET_CART", {
           cart: data.data.cart,
         });
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "Added to cart",
+            display: true,
+            type: "success",
+          },
+          { root: true }
+        );
         commit("SET_SHOW", false, { root: true });
         resolve({ data });
       })
@@ -119,7 +128,7 @@ export const removeFromCart = ({ commit }, payload) => {
   });
 };
 
-export const deleteFromCart = ({ commit }, payload) => {
+export const deleteFromCart = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_LOADING", true, { root: true });
     api
@@ -131,6 +140,15 @@ export const deleteFromCart = ({ commit }, payload) => {
         commit("SET_CART", {
           cart: data.data.cart,
         });
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "Deleted from cart",
+            display: true,
+            type: "success",
+          },
+          { root: true }
+        );
         commit("SET_LOADING", false, { root: true });
         resolve({ data });
       })
