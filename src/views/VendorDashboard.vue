@@ -5,15 +5,27 @@
     </h1>
     <div
       class="approve-div container"
-      v-if="vendorDetails.vendor_status === false"
+      v-if="!loading && vendorDetails.vendor_status === false"
     >
-      <h1>
-        Your shop has not been approved, please pay registration fee,<br />
-        and select dispatch.
+      <h1 v-if="!loading && vendorDetails.account_details.country === ''">
+        Please input your account details.
       </h1>
-      <button @click="pay">
+      <h1 v-if="!loading && vendorDetails.account_details.country !== ''">
+        Your shop has not been approved, please pay $20 for registration.
+      </h1>
+      <button
+        @click="pay"
+        v-if="!loading && vendorDetails.account_details.country !== ''"
+      >
         Pay<span class="loader" v-if="loading"></span>
       </button>
+      <router-link
+        to="/vendor-account"
+        class="button"
+        v-if="!loading && vendorDetails.account_details.country === ''"
+      >
+        Input details<span class="loader" v-if="loading"></span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -108,6 +120,24 @@ export default {
   button {
     position: relative;
     display: flex;
+    align-items: center;
+    margin: 0 auto;
+    background: var(--cyanBlue);
+    border-radius: 5px;
+    padding: 0.5rem 2rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s;
+
+    span {
+      position: absolute;
+      right: 0.7rem;
+    }
+  }
+
+  .button {
+    position: relative;
+    display: flex;
+    color: #ffffff;
     align-items: center;
     margin: 0 auto;
     background: var(--cyanBlue);
