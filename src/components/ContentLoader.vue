@@ -54,7 +54,7 @@
     justify-content: center;
     align-items: center;
     color: var(--cyanBlue);
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 </style>
