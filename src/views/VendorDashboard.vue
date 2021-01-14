@@ -1,17 +1,17 @@
 <template>
   <div id="vendor-dashboard">
-    <h1 v-if="!loading && vendorDetails.vendor_status === true">
+    <h1 v-if="!loading && vendorDetails.is_registered === true">
       hello from vendor dashboard
     </h1>
     <div
       class="approve-div container"
-      v-if="!loading && vendorDetails.vendor_status === false"
+      v-if="!loading && vendorDetails.is_registered === false"
     >
       <h1 v-if="!loading && vendorDetails.account_details.country === ''">
         Please input your account details.
       </h1>
       <h1 v-if="!loading && vendorDetails.account_details.country !== ''">
-        Your shop has not been approved, please pay $20 for registration.
+        Your shop has not been approved, please pay $20 registration fee.
       </h1>
       <button
         @click="pay"
@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted() {
-    this.vendorDetails = storage.getVendorDetails().user;
+    this.vendorDetails = storage.getVendorDetails();
     if (this.vendorDetails.vendor_status === false) {
       this.paymentDetails(this.vendorDetails);
     }
