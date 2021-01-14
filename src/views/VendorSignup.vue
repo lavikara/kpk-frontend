@@ -221,7 +221,7 @@
             <input
               type="password"
               name="confirmpassword"
-              v-model="details.confirmPassword"
+              v-model="confirmPassword.confirm"
               @focus="resetInputValidation"
               @blur="validateInput"
               placeholder="Confirm password *"
@@ -262,6 +262,7 @@ export default {
     ...mapState({
       loading: (state) => state.loading,
       details: (state) => state.authModule.signupVendor,
+      confirmPassword: (state) => state.authModule.confirmPassword,
       formValidation: (state) => state.authModule.formValidation,
     }),
   },
@@ -278,7 +279,7 @@ export default {
         });
         location.reload();
       } else {
-        delete this.details.confirmPassword;
+        // delete this.details.confirmPassword;
         this.signupVendor(this.details);
       }
     },
@@ -342,8 +343,8 @@ export default {
           break;
         case "Confirm password *":
           if (
-            this.details.confirmPassword.length < 6 ||
-            this.details.confirmPassword !== this.details.password
+            this.confirmPassword.confirm.length < 6 ||
+            this.confirmPassword.confirm !== this.details.password
           ) {
             this.validate({ field: field, invalid: true });
           } else {
