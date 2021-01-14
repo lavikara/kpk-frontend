@@ -1,8 +1,14 @@
 <template>
   <div id="dispatch" class="container">
-    <div v-if="!loading" class="rider-container">
+    <div v-if="!loading && vendorDetails" class="rider-container">
       <div>
         <h1>Selected dispatch</h1>
+        <h3
+          class="noty"
+          v-if="!loading && vendorDetails.asigned_riders.length === 0"
+        >
+          You can't upload products if you don't select a dispatch.
+        </h3>
         <ul>
           <li
             v-for="rider in vendorDetails.asigned_riders"
@@ -66,7 +72,7 @@ export default {
   },
   data() {
     return {
-      vendor: storage.getVendorDetails().user,
+      vendor: storage.getVendorDetails(),
     };
   },
   mounted() {
@@ -89,7 +95,7 @@ export default {
     ]),
     ...mapActions("notificationModule", ["showToast"]),
     selectDispatch(id) {
-      if (this.vendorDetails.asigned_riders.length === 3) {
+      if (this.vendorDetails.asigned_riders.length === 1) {
         this.showToast({
           description: "Maximum riders selected",
           display: true,
@@ -142,6 +148,10 @@ export default {
       text-align: left;
       font-size: 20px;
       margin-left: 1.2rem;
+    }
+
+    .noty {
+      margin: 4rem 0 0 0;
     }
 
     ul {

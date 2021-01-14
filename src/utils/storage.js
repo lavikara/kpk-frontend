@@ -1,29 +1,40 @@
 export default {
-  setVendor(data) {
-    return localStorage.setItem("vendor_details", JSON.stringify(data));
-  },
   setCustomer(data) {
     return localStorage.setItem("customer_details", JSON.stringify(data));
   },
-  setRider(data) {
-    return localStorage.setItem("rider_details", JSON.stringify(data));
+  setCustomerToken(data) {
+    return localStorage.setItem("customer_token", JSON.stringify(data));
   },
-  getVendorDetails() {
-    return JSON.parse(localStorage.getItem("vendor_details"));
+  getCustomerToken() {
+    return JSON.parse(localStorage.getItem("customer_token"));
   },
   getCustomerDetails() {
     return JSON.parse(localStorage.getItem("customer_details"));
   },
+
+  setVendor(data) {
+    return localStorage.setItem("vendor_details", JSON.stringify(data));
+  },
+  setVendorToken(data) {
+    return localStorage.setItem("vendor_token", JSON.stringify(data));
+  },
+  getVendorToken() {
+    return JSON.parse(localStorage.getItem("vendor_token"));
+  },
+  getVendorDetails() {
+    return JSON.parse(localStorage.getItem("vendor_details"));
+  },
+
+  setRider(data) {
+    return localStorage.setItem("rider_details", JSON.stringify(data));
+  },
+  setRiderToken(data) {
+    return localStorage.setItem("rider_token", JSON.stringify(data));
+  },
   getRiderDetails() {
     return JSON.parse(localStorage.getItem("rider_details"));
   },
-  getVendorToken() {
-    return JSON.parse(localStorage.getItem("vendor_details")).token;
-  },
-  getCustomerToken() {
-    return JSON.parse(localStorage.getItem("customer_details")).token;
-  },
   getRiderToken() {
-    return JSON.parse(localStorage.getItem("rider_details")).token;
+    return JSON.parse(localStorage.getItem("rider_token"));
   },
 };

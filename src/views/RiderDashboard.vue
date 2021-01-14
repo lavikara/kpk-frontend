@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted() {
-    this.riderDetails = storage.getRiderDetails().user;
+    this.riderDetails = storage.getRiderDetails();
   },
   computed: {
     ...mapState({

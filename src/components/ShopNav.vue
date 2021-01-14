@@ -98,11 +98,12 @@ export default {
     ...mapActions("cartModule", ["updateCartCounter", "resetCartCounter"]),
     getInitials() {
       if (this.isLoggedIn) {
-        const firstName = this.isLoggedIn.user.first_name;
+        const firstName = this.isLoggedIn.first_name;
         this.initials = firstName;
       }
     },
     logout() {
+      localStorage.removeItem("customer_token");
       localStorage.removeItem("customer_details");
       this.resetCartCounter(0);
       if (this.$route.name === "Home") {

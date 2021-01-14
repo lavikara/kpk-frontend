@@ -71,13 +71,14 @@ export default {
   methods: {
     getInitials() {
       if (this.vendorDetails) {
-        const firstName = this.vendorDetails.user.business_name;
+        const firstName = this.vendorDetails.business_name;
         this.initials = firstName;
-        this.approved = this.vendorDetails.user.vendor_status;
+        this.approved = this.vendorDetails.is_registered;
       }
     },
     logout() {
       localStorage.removeItem("vendor_details");
+      localStorage.removeItem("vendor_token");
       this.$router.push("/");
     },
   },

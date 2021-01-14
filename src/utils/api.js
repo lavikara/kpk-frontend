@@ -105,4 +105,9 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  verifyVendorPayment(data) {
+    return axios.post(`${PAYMENT_URL}/verify`, data, {
+      headers: this.getVendorHeader(),
+    });
+  },
 };

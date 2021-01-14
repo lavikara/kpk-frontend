@@ -149,7 +149,7 @@ export default {
   },
   data() {
     return {
-      country: storage.getVendorDetails().user.country,
+      country: storage.getVendorDetails().country,
     };
   },
   mounted() {

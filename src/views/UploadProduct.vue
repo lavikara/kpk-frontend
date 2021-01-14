@@ -103,6 +103,10 @@ export default {
       next((vm) => {
         vm.$router.push("/vendor-login");
       });
+    } else if (storage.getVendorDetails().asigned_riders.length === 0) {
+      next((vm) => {
+        vm.$router.push("/dispatch");
+      });
     } else {
       next();
     }
@@ -142,10 +146,6 @@ export default {
           });
         })
         .catch((err) => console.error(err));
-    },
-    logout() {
-      localStorage.removeItem("vendor_details");
-      this.$router.push("/");
     },
   },
 };

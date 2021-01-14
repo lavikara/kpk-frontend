@@ -149,7 +149,7 @@ export default {
   },
   data() {
     return {
-      country: storage.getRiderDetails().user.country,
+      country: storage.getRiderDetails().country,
     };
   },
   mounted() {

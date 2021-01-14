@@ -8,7 +8,6 @@ export default {
     last_name: "",
     email: "",
     password: "",
-    confirmPassword: "",
     phone_number: "",
     address: {
       street: "",
@@ -23,7 +22,6 @@ export default {
     last_name: "",
     email: "",
     password: "",
-    confirmPassword: "",
     phone_number: "",
     address: {
       street: "",
@@ -45,6 +43,9 @@ export default {
       lga: "",
       state: "",
     },
+  },
+  confirmPassword: {
+    confirm: "",
   },
   formValidation: {
     first_name: false,

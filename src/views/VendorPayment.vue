@@ -1,14 +1,22 @@
 <template>
   <div>
-    <h1>hello from vendor payment</h1>
+    <ContentLoader v-if="loading">
+      <h3 class="loader-text">Please hold on while we confirm payment.</h3>
+      <div class="loader"></div>
+    </ContentLoader>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import ContentLoader from "@/components/ContentLoader";
 import storage from "@/utils/storage.js";
 
 export default {
+  name: "VendorPayment",
+  components: {
+    ContentLoader,
+  },
   data() {
     return {
       vendorDetails: storage.getVendorDetails(),
@@ -17,14 +25,10 @@ export default {
   beforeRouteEnter: (to, from, next) => {
     if (to.query.status === "successful") {
       next((vm) => {
-        localStorage.removeItem("vendor_details");
-        vm.showModal({
-          description:
-            "Payment successful, please login and select dispatch to complete the process.",
-          display: true,
-          type: "info",
+        vm.verifyVendorPayment({
+          id: to.query.transaction_id,
+          ref: to.query.tx_ref,
         });
-        vm.$router.push("/vendor-login");
       });
     } else {
       next((vm) => {
@@ -39,8 +43,14 @@ export default {
     }
   },
   mounted() {},
+  computed: {
+    ...mapState({
+      loading: (state) => state.loading,
+    }),
+  },
   methods: {
-    ...mapActions("notificationModule", ["showModal"]),
+    ...mapActions("notificationModule", ["showToast"]),
+    ...mapActions("paymentModule", ["verifyVendorPayment"]),
   },
 };
 </script>
