@@ -1,5 +1,6 @@
 import api from "@/utils/api.js";
 import router from "../../router";
+import storage from "@/utils/storage.js";
 import randomString from "@/utils/randomString.js";
 
 export const generateVendorPaymentLink = ({ commit }, payload) => {
@@ -58,16 +59,16 @@ export const createRiderSubAccount = ({ commit, dispatch }, payload) => {
       .then(({ data }) => {
         commit("SET_LOADING", false, { root: true });
         dispatch(
-          "notificationModule/showModal",
+          "notificationModule/showToast",
           {
-            description: "Successful, please login to complete process.",
+            description: "Successful.",
             display: true,
             type: "success",
           },
           { root: true }
         );
-        localStorage.removeItem("rider_details");
-        router.push("/rider-login");
+        storage.setRider(data.data);
+        router.push("/rider-dashboard");
         commit("CLEAR_ACCOUNT_DETAILS", {
           accountDetails: {
             country: "",
@@ -96,17 +97,16 @@ export const createVendorSubAccount = ({ commit, dispatch }, payload) => {
       .then(({ data }) => {
         commit("SET_LOADING", false, { root: true });
         dispatch(
-          "notificationModule/showModal",
+          "notificationModule/showToast",
           {
-            description:
-              "Successful, please login and pay $20 for registration.",
+            description: "Successful.",
             display: true,
             type: "success",
           },
           { root: true }
         );
-        localStorage.removeItem("vendor_details");
-        router.push("/vendor-login");
+        storage.setVendor(data.data);
+        router.push("/vendor-dashboard");
         commit("CLEAR_ACCOUNT_DETAILS", {
           accountDetails: {
             country: "",
@@ -117,6 +117,45 @@ export const createVendorSubAccount = ({ commit, dispatch }, payload) => {
             business_email: "",
           },
         });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};
+
+export const verifyVendorPayment = ({ commit, dispatch }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .verifyVendorPayment(payload)
+      .then(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        switch (data.data.data.meta.type) {
+          case "vendor registration":
+            if (data.data.data.tx_ref == payload.ref) {
+              dispatch(
+                "notificationModule/showToast",
+                {
+                  description: "Payment was successful",
+                  display: true,
+                  type: "success",
+                },
+                { root: true }
+              );
+              const id = data.data.data.tx_ref.slice(10);
+              dispatch("userModule/getVendorAfterPaymentVerification", id, {
+                root: true,
+              });
+            }
+            break;
+
+          default:
+            break;
+        }
         resolve({ data });
       })
       .catch(({ data }) => {
