@@ -18,7 +18,8 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
             },
             { root: true }
           );
-          storage.setVendor(data.data);
+          storage.setVendor(data.data.user);
+          storage.setVendorToken(data.data.token);
           router.push("/vendor-dashboard");
           commit("CLEAR_SIGNUP_DETAILS", {
             signupVendor: {
@@ -26,7 +27,6 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
               last_name: "",
               email: "",
               password: "",
-              confirmPassword: "",
               phone_number: "",
               address: {
                 street: "",
@@ -35,6 +35,11 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
               },
               business_name: "",
               country: "",
+            },
+          });
+          commit("CLEAR_CONFIRM_PASSWORD", {
+            confirmPassword: {
+              confirm: "",
             },
           });
           commit("SET_LOADING", false, { root: true });
@@ -74,7 +79,8 @@ export const signupRider = ({ commit, dispatch }, payload) => {
             },
             { root: true }
           );
-          storage.setRider(data.data);
+          storage.setRider(data.data.user);
+          storage.setRiderToken(data.data.token);
           router.push("/rider-dashboard");
           commit("CLEAR_RIDER_DETAILS", {
             signupRider: {
@@ -82,7 +88,6 @@ export const signupRider = ({ commit, dispatch }, payload) => {
               last_name: "",
               email: "",
               password: "",
-              confirmPassword: "",
               phone_number: "",
               address: {
                 street: "",
@@ -91,6 +96,11 @@ export const signupRider = ({ commit, dispatch }, payload) => {
               },
               company_name: "",
               country: "",
+            },
+          });
+          commit("CLEAR_CONFIRM_PASSWORD", {
+            confirmPassword: {
+              confirm: "",
             },
           });
           commit("SET_LOADING", false, { root: true });
@@ -130,7 +140,8 @@ export const signupCustomer = ({ commit, dispatch }, payload) => {
             },
             { root: true }
           );
-          storage.setCustomer(data.data);
+          storage.setCustomer(data.data.user);
+          storage.setCustomerToken(data.data.token);
           router.push("/");
           commit("CLEAR_CUSTOMER_DETAILS", {
             signupCustomer: {
@@ -177,7 +188,8 @@ export const loginVendor = ({ commit }, payload) => {
         commit("SET_LOADING", false, { root: true });
 
         if (data.status == "success" && data.data.user.role === "vendor") {
-          storage.setVendor(data.data);
+          storage.setVendor(data.data.user);
+          storage.setVendorToken(data.data.token);
           router.push("/vendor-dashboard");
           commit("CLEAR_LOGIN_DETAILS", {
             loginDetails: {
@@ -209,7 +221,8 @@ export const loginCustomer = ({ commit, dispatch }, payload) => {
         commit("SET_LOADING", false, { root: true });
 
         if (data.status == "success" && data.data.user.role === "customer") {
-          storage.setCustomer(data.data);
+          storage.setCustomer(data.data.user);
+          storage.setCustomerToken(data.data.token);
           dispatch("cartModule/updateCartCounter", {}, { root: true });
           router.push("/");
           commit("CLEAR_LOGIN_DETAILS", {
@@ -242,7 +255,8 @@ export const loginRider = ({ commit, dispatch }, payload) => {
         commit("SET_LOADING", false, { root: true });
 
         if (data.status == "success" && data.data.user.role === "rider") {
-          storage.setRider(data.data);
+          storage.setRider(data.data.user);
+          storage.setRiderToken(data.data.token);
           router.push("/rider-dashboard");
           commit("CLEAR_LOGIN_DETAILS", {
             loginDetails: {
