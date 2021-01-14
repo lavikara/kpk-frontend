@@ -16,6 +16,7 @@ export const getCart = ({ commit }, payload) => {
       .catch((error) => {
         commit("SET_LOADING", false, { root: true });
         alert("Customer has no cart");
+        localStorage.removeItem("customer_token");
         localStorage.removeItem("customer_details");
         if (router.history.current.name === "Home") {
           router.push("/shop");
@@ -39,6 +40,7 @@ export const updateCartCounter = ({ commit }, payload) => {
       })
       .catch((error) => {
         alert("Customer has no cart");
+        localStorage.removeItem("customer_token");
         localStorage.removeItem("customer_details");
         if (router.history.current.name === "Home") {
           router.push("/shop");
@@ -87,6 +89,7 @@ export const addToCart = ({ commit, dispatch }, payload) => {
         console.log(error);
         commit("SET_SHOW", false, { root: true });
         alert("Customer has no cart");
+        localStorage.removeItem("customer_token");
         localStorage.removeItem("customer_details");
         if (router.history.current.name === "Home") {
           router.push("/shop");
@@ -117,6 +120,7 @@ export const removeFromCart = ({ commit }, payload) => {
         console.log(error);
         commit("SET_LOADING", false, { root: true });
         alert("Customer has no cart");
+        localStorage.removeItem("customer_token");
         localStorage.removeItem("customer_details");
         if (router.history.current.name === "Home") {
           router.push("/shop");
@@ -156,6 +160,7 @@ export const deleteFromCart = ({ commit, dispatch }, payload) => {
         console.log(error);
         commit("SET_LOADING", false, { root: true });
         alert("Customer has no cart");
+        localStorage.removeItem("customer_token");
         localStorage.removeItem("customer_details");
         if (router.history.current.name === "Home") {
           router.push("/shop");
