@@ -65,13 +65,14 @@ export default {
   methods: {
     getInitials() {
       if (this.riderDetails) {
-        const companyName = this.riderDetails.user.company_name;
+        const companyName = this.riderDetails.company_name;
         this.initials = companyName;
-        this.approved = this.riderDetails.user.rider_status;
+        this.approved = this.riderDetails.rider_status;
       }
     },
     logout() {
       localStorage.removeItem("rider_details");
+      localStorage.removeItem("rider_token");
       this.$router.push("/");
     },
   },
