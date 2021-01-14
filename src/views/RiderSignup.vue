@@ -279,7 +279,6 @@ export default {
         });
         location.reload();
       } else {
-        // delete this.details.confirmPassword;
         this.signupRider(this.details);
       }
     },
