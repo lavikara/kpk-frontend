@@ -14,6 +14,10 @@ export const CLEAR_LOGIN_DETAILS = (state, payload) => {
   state.loginDetails = payload.loginDetails;
 };
 
+export const CLEAR_CONFIRM_PASSWORD = (state, payload) => {
+  state.confirmPassword = payload.confirmPassword;
+};
+
 export const VALIDATE_INPUT = (state, payload) => {
   switch (payload.field) {
     case "First name *":
