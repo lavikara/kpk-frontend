@@ -93,12 +93,6 @@ const routes = [
           import(/* webpackChunkName: "vendor" */ "../views/VendorAccount.vue"),
       },
       {
-        path: "/confirm-payment",
-        name: "VendorPayment",
-        component: () =>
-          import(/* webpackChunkName: "vendor" */ "../views/VendorPayment.vue"),
-      },
-      {
         path: "/dispatch",
         name: "Dispatch",
         component: () =>
@@ -173,6 +167,14 @@ const routes = [
         name: "VendorLogin",
         component: () =>
           import(/* webpackChunkName: "onboard" */ "../views/VendorLogin.vue"),
+      },
+      {
+        path: "/confirm-payment",
+        name: "VendorPayment",
+        component: () =>
+          import(
+            /* webpackChunkName: "onboard" */ "../views/VendorPayment.vue"
+          ),
       },
     ],
   },
