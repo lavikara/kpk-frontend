@@ -62,7 +62,7 @@
             </div>
 
             <div class="price">
-              <h4>₦ {{ product.price.toLocaleString() }}</h4>
+              <h4>${{ product.price.toLocaleString() }}</h4>
             </div>
           </div>
           <button @click="add(product.id)">

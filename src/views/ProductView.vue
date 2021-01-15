@@ -8,7 +8,7 @@
         <div class="details-container">
           <h2 class="name">{{ product.name | setUppercase }}</h2>
           <p>{{ product.description | setUppercase }}</p>
-          <h4>₦ {{ product.price.toLocaleString() }}</h4>
+          <h4>${{ product.price.toLocaleString() }}</h4>
           <button @click="add(product.id)">
             <span>
               Add to cart<img
