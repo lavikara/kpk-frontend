@@ -11,7 +11,9 @@
         Please input your account details.
       </h1>
       <h1 v-if="!loading && vendorDetails.account_details.country !== ''">
-        Your shop has not been approved, please pay $20 registration fee.
+        Your shop has not been approved, please pay $20 registration fee. (If
+        you've paied and still get this notification, just logout and login
+        again)
       </h1>
       <button
         @click="pay"
