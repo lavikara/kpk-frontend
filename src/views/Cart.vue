@@ -32,11 +32,11 @@
           </li>
           <li class="item">
             <label for="price">Unit price</label>
-            <h4>₦ {{ item.price.toLocaleString() }}</h4>
+            <h4>${{ item.price.toLocaleString() }}</h4>
           </li>
           <li class="item">
             <label for="price">Sub total</label>
-            <h4>₦ {{ item.sub_total.toLocaleString() }}</h4>
+            <h4>${{ item.sub_total.toLocaleString() }}</h4>
           </li>
           <li class="item">
             <span
@@ -52,13 +52,18 @@
             Total quantity: <span>{{ cart.total_quantity }}</span>
           </li>
           <li>
-            Total amount: <span>₦ {{ cart.total_price.toLocaleString() }}</span>
+            Total amount: <span>${{ cart.total_price.toLocaleString() }}</span>
+          </li>
+        </ul>
+        <ul class="total-fig delivery">
+          <li>
+            Delivery: <span>${{ cart.dispatch.toLocaleString() }}</span>
           </li>
         </ul>
       </div>
       <div class="buttons">
         <button @click="navigateTo('/shop')">Continue shopping</button>
-        <button class="checkout">Checkout</button>
+        <button class="checkout" @click="checkout">Checkout</button>
       </div>
     </div>
     <ContentLoader v-else>
@@ -237,6 +242,10 @@ export default {
           font-weight: 700;
         }
       }
+    }
+
+    .delivery {
+      margin-top: 1rem;
     }
   }
 
