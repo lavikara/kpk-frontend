@@ -115,6 +115,11 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  verifyCustomerPayment(data) {
+    return axios.post(`${PAYMENT_URL}/verify`, data, {
+      headers: this.getCustomerHeader(),
+    });
+  },
   checkout() {
     return axios.get(`${CART_URL}/checkout`, {
       headers: this.getCustomerHeader(),

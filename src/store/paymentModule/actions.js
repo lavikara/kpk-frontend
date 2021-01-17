@@ -215,6 +215,64 @@ export const verifyVendorPayment = ({ commit, dispatch }, payload) => {
   });
 };
 
+export const verifyCustomerPayment = ({ commit, dispatch }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .verifyCustomerPayment(payload)
+      .then(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        switch (data.data.data.meta.type) {
+          case "vendor registration":
+            if (data.data.data.tx_ref == payload.ref) {
+              dispatch(
+                "notificationModule/showToast",
+                {
+                  description: "Payment was successful",
+                  display: true,
+                  type: "success",
+                },
+                { root: true }
+              );
+              const id = data.data.data.tx_ref.slice(10);
+              dispatch("userModule/getVendorAfterPaymentVerification", id, {
+                root: true,
+              });
+            }
+            break;
+          case "customer payment":
+            if (data.data.data.tx_ref == payload.ref) {
+              dispatch(
+                "notificationModule/showToast",
+                {
+                  description: "Payment was successful",
+                  display: true,
+                  type: "success",
+                },
+                { root: true }
+              );
+              dispatch("cartModule/cartCheckout", {}, { root: true });
+              if (router.history.current.name === "Home") {
+                router.push("/shop");
+              } else if (router.history.current.name !== "Home") {
+                router.push("/");
+              }
+            }
+            break;
+
+          default:
+            break;
+        }
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};
+
 export const paymentDetails = ({ commit }, payload) => {
   commit("SET_PAYMENT_DETAILS", {
     tx_ref: randomString.getRandomString(10) + payload.id,

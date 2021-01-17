@@ -25,7 +25,7 @@ export default {
   beforeRouteEnter: (to, from, next) => {
     if (to.query.status === "successful") {
       next((vm) => {
-        vm.verifyVendorPayment({
+        vm.verifyCustomerPayment({
           id: to.query.transaction_id,
           ref: to.query.tx_ref,
         });
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     ...mapActions("notificationModule", ["showModal", "showToast"]),
-    ...mapActions("paymentModule", ["verifyVendorPayment"]),
+    ...mapActions("paymentModule", ["verifyCustomerPayment"]),
   },
 };
 </script>
