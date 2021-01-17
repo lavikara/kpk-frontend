@@ -164,46 +164,20 @@ export const verifyVendorPayment = ({ commit, dispatch }, payload) => {
       .verifyVendorPayment(payload)
       .then(({ data }) => {
         commit("SET_LOADING", false, { root: true });
-        switch (data.data.data.meta.type) {
-          case "vendor registration":
-            if (data.data.data.tx_ref == payload.ref) {
-              dispatch(
-                "notificationModule/showToast",
-                {
-                  description: "Payment was successful",
-                  display: true,
-                  type: "success",
-                },
-                { root: true }
-              );
-              const id = data.data.data.tx_ref.slice(10);
-              dispatch("userModule/getVendorAfterPaymentVerification", id, {
-                root: true,
-              });
-            }
-            break;
-          case "customer payment":
-            if (data.data.data.tx_ref == payload.ref) {
-              dispatch(
-                "notificationModule/showToast",
-                {
-                  description: "Payment was successful",
-                  display: true,
-                  type: "success",
-                },
-                { root: true }
-              );
-              dispatch("cartModule/cartCheckout", {}, { root: true });
-              if (router.history.current.name === "Home") {
-                router.push("/shop");
-              } else if (router.history.current.name !== "Home") {
-                router.push("/");
-              }
-            }
-            break;
-
-          default:
-            break;
+        if (data.data.data.tx_ref == payload.ref) {
+          dispatch(
+            "notificationModule/showToast",
+            {
+              description: "Payment was successful",
+              display: true,
+              type: "success",
+            },
+            { root: true }
+          );
+          const id = data.data.data.tx_ref.slice(10);
+          dispatch("userModule/getVendorAfterPaymentVerification", id, {
+            root: true,
+          });
         }
         resolve({ data });
       })
@@ -222,46 +196,22 @@ export const verifyCustomerPayment = ({ commit, dispatch }, payload) => {
       .verifyCustomerPayment(payload)
       .then(({ data }) => {
         commit("SET_LOADING", false, { root: true });
-        switch (data.data.data.meta.type) {
-          case "vendor registration":
-            if (data.data.data.tx_ref == payload.ref) {
-              dispatch(
-                "notificationModule/showToast",
-                {
-                  description: "Payment was successful",
-                  display: true,
-                  type: "success",
-                },
-                { root: true }
-              );
-              const id = data.data.data.tx_ref.slice(10);
-              dispatch("userModule/getVendorAfterPaymentVerification", id, {
-                root: true,
-              });
-            }
-            break;
-          case "customer payment":
-            if (data.data.data.tx_ref == payload.ref) {
-              dispatch(
-                "notificationModule/showToast",
-                {
-                  description: "Payment was successful",
-                  display: true,
-                  type: "success",
-                },
-                { root: true }
-              );
-              dispatch("cartModule/cartCheckout", {}, { root: true });
-              if (router.history.current.name === "Home") {
-                router.push("/shop");
-              } else if (router.history.current.name !== "Home") {
-                router.push("/");
-              }
-            }
-            break;
-
-          default:
-            break;
+        if (data.data.data.tx_ref == payload.ref) {
+          dispatch(
+            "notificationModule/showToast",
+            {
+              description: "Payment was successful",
+              display: true,
+              type: "success",
+            },
+            { root: true }
+          );
+          dispatch("cartModule/cartCheckout", {}, { root: true });
+          if (router.history.current.name === "Home") {
+            router.push("/shop");
+          } else if (router.history.current.name !== "Home") {
+            router.push("/");
+          }
         }
         resolve({ data });
       })
