@@ -134,7 +134,7 @@ export default {
     ...mapActions("notificationModule", ["showToast", "showModal"]),
     ...mapActions("paymentModule", [
       "cartPaymentDetails",
-      "generateVendorPaymentLink",
+      "generateCustomerPaymentLink",
     ]),
     checkout() {
       this.showModal({
