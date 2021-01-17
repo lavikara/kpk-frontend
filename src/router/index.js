@@ -150,6 +150,14 @@ const routes = [
             /* webpackChunkName: "onboard" */ "../views/CustomerLogin.vue"
           ),
       },
+      {
+        path: "/customer-payment",
+        name: "CustomerPayment",
+        component: () =>
+          import(
+            /* webpackChunkName: "onboard" */ "../views/CustomerPayment.vue"
+          ),
+      },
     ],
   },
   {
