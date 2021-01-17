@@ -120,7 +120,7 @@ export default {
     ...mapState({
       loading: (state) => state.loading,
       cart: (state) => state.cartModule.cart.items,
-      details: (state) => state.paymentModule.cartPaymentDetails,
+      details: (state) => state.paymentModule.paymentDetails,
       paymentUrl: (state) => state.paymentModule.paymentUrl.url,
     }),
   },
