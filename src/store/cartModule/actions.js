@@ -76,6 +76,39 @@ export const resetCartCounter = ({ commit }, payload) => {
   });
 };
 
+export const cartCheckout = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .checkout()
+      .then(({ data }) => {
+        commit("SET_CART", {
+          cart: data.data.cart,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch((error) => {
+        commit("SET_LOADING", false, { root: true });
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
+        if (router.history.current.name === "Home") {
+          router.push("/shop");
+        } else if (router.history.current.name !== "Home") {
+          router.push("/");
+        }
+        reject(error);
+      });
+  });
+};
+
 export const addToCart = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_SHOW", true, { root: true });
