@@ -152,6 +152,25 @@ export const verifyVendorPayment = ({ commit, dispatch }, payload) => {
               });
             }
             break;
+          case "customer payment":
+            if (data.data.data.tx_ref == payload.ref) {
+              dispatch(
+                "notificationModule/showToast",
+                {
+                  description: "Payment was successful",
+                  display: true,
+                  type: "success",
+                },
+                { root: true }
+              );
+              dispatch("cartModule/cartCheckout", {}, { root: true });
+              if (router.history.current.name === "Home") {
+                router.push("/shop");
+              } else if (router.history.current.name !== "Home") {
+                router.push("/");
+              }
+            }
+            break;
 
           default:
             break;
@@ -181,8 +200,32 @@ export const paymentDetails = ({ commit }, payload) => {
       name: payload.first_name + payload.last_name,
     },
     customizations: {
-      title: "Vendor registration",
+      title: "KPK stors",
       description: "Vendor registration fee",
+      logo:
+        "https://res.cloudinary.com/temikara/image/upload/v1610364968/istockphoto-1206806317-612x612_sscwyi.jpg",
+    },
+  });
+};
+
+export const cartPaymentDetails = ({ commit }, payload) => {
+  commit("SET_PAYMENT_DETAILS", {
+    tx_ref: randomString.getRandomString(10) + payload.customer.id,
+    redirect_url: process.env.VUE_APP_CUSTOMER_PAYMENT_REDIRECT,
+    payment_options: "card, account, ussd, barter, banktransfer",
+    meta: {
+      user_id: payload.customer.id,
+      type: "customer payment",
+      amount: payload.amount,
+    },
+    customer: {
+      email: payload.customer.email,
+      phonenumber: payload.customer.phone_number,
+      name: payload.customer.first_name + payload.customer.last_name,
+    },
+    customizations: {
+      title: "KPK stors",
+      description: "Cart checkout",
       logo:
         "https://res.cloudinary.com/temikara/image/upload/v1610364968/istockphoto-1206806317-612x612_sscwyi.jpg",
     },

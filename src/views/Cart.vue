@@ -87,7 +87,9 @@ export default {
     ContentLoader,
   },
   data() {
-    return {};
+    return {
+      customerDetails: "",
+    };
   },
   beforeRouteEnter: (to, from, next) => {
     if (!storage.getCustomerDetails()) {
@@ -107,10 +109,19 @@ export default {
       next();
     }
   },
+  mounted() {
+    this.customerDetails = storage.getCustomerDetails();
+    this.cartPaymentDetails({
+      customer: this.customerDetails,
+      amount: this.cart.total_price + this.cart.dispatch,
+    });
+  },
   computed: {
     ...mapState({
       loading: (state) => state.loading,
       cart: (state) => state.cartModule.cart.items,
+      details: (state) => state.paymentModule.paymentDetails,
+      paymentUrl: (state) => state.paymentModule.paymentUrl.url,
     }),
   },
   methods: {
@@ -121,6 +132,18 @@ export default {
       "deleteFromCart",
     ]),
     ...mapActions("notificationModule", ["showToast", "showModal"]),
+    ...mapActions("paymentModule", [
+      "cartPaymentDetails",
+      "generateVendorPaymentLink",
+    ]),
+    checkout() {
+      this.showModal({
+        description: "You will be redirected to our payment platform.",
+        display: true,
+        type: "info",
+      });
+      this.generateVendorPaymentLink(this.details);
+    },
     add(id) {
       this.addToCart({ product_id: id });
     },
@@ -135,6 +158,13 @@ export default {
         return;
       }
       this.$router.push(page);
+    },
+  },
+  watch: {
+    paymentUrl(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        window.location = newValue;
+      }
     },
   },
 };

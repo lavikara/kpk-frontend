@@ -15,9 +15,15 @@ export const getCart = ({ commit }, payload) => {
       })
       .catch((error) => {
         commit("SET_LOADING", false, { root: true });
-        alert("Customer has no cart");
-        localStorage.removeItem("customer_token");
-        localStorage.removeItem("customer_details");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
         if (router.history.current.name === "Home") {
           router.push("/shop");
         } else if (router.history.current.name !== "Home") {
@@ -36,12 +42,21 @@ export const updateCartCounter = ({ commit }, payload) => {
         commit("SET_CART_COUNTER", {
           cartCounter: data.data.cart.total_quantity,
         });
+        commit("SET_CART", {
+          cart: data.data.cart,
+        });
         resolve({ data });
       })
       .catch((error) => {
-        alert("Customer has no cart");
-        localStorage.removeItem("customer_token");
-        localStorage.removeItem("customer_details");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
         if (router.history.current.name === "Home") {
           router.push("/shop");
         } else if (
@@ -58,6 +73,39 @@ export const updateCartCounter = ({ commit }, payload) => {
 export const resetCartCounter = ({ commit }, payload) => {
   commit("SET_CART_COUNTER", {
     cartCounter: payload,
+  });
+};
+
+export const cartCheckout = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .checkout()
+      .then(({ data }) => {
+        commit("SET_CART", {
+          cart: data.data.cart,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch((error) => {
+        commit("SET_LOADING", false, { root: true });
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
+        if (router.history.current.name === "Home") {
+          router.push("/shop");
+        } else if (router.history.current.name !== "Home") {
+          router.push("/");
+        }
+        reject(error);
+      });
   });
 };
 
@@ -88,9 +136,15 @@ export const addToCart = ({ commit, dispatch }, payload) => {
       .catch((error) => {
         console.log(error);
         commit("SET_SHOW", false, { root: true });
-        alert("Customer has no cart");
-        localStorage.removeItem("customer_token");
-        localStorage.removeItem("customer_details");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
         if (router.history.current.name === "Home") {
           router.push("/shop");
         } else if (router.history.current.name !== "Home") {
@@ -119,9 +173,15 @@ export const removeFromCart = ({ commit }, payload) => {
       .catch((error) => {
         console.log(error);
         commit("SET_LOADING", false, { root: true });
-        alert("Customer has no cart");
-        localStorage.removeItem("customer_token");
-        localStorage.removeItem("customer_details");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
         if (router.history.current.name === "Home") {
           router.push("/shop");
         } else if (router.history.current.name !== "Home") {
@@ -159,9 +219,15 @@ export const deleteFromCart = ({ commit, dispatch }, payload) => {
       .catch((error) => {
         console.log(error);
         commit("SET_LOADING", false, { root: true });
-        alert("Customer has no cart");
-        localStorage.removeItem("customer_token");
-        localStorage.removeItem("customer_details");
+        dispatch(
+          "notificationModule/showToast",
+          {
+            description: "An error occured",
+            display: true,
+            type: "error",
+          },
+          { root: true }
+        );
         if (router.history.current.name === "Home") {
           router.push("/shop");
         } else if (router.history.current.name !== "Home") {

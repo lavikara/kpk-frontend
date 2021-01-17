@@ -110,4 +110,9 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  checkout() {
+    return axios.get(`${CART_URL}/checkout`, {
+      headers: this.getCustomerHeader(),
+    });
+  },
 };
