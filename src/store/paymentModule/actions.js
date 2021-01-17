@@ -33,6 +33,36 @@ export const generateVendorPaymentLink = ({ commit }, payload) => {
   });
 };
 
+export const generateCustomerPaymentLink = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .generateCustomerPaymentLink(payload)
+      .then(({ data }) => {
+        if (data.data.status === "success") {
+          commit("SET_PAYMENT_URL", data.data.data.link);
+        } else {
+          dispatch(
+            "notificationModule/showModal",
+            {
+              description: "Our payment platform is down, try later",
+              display: true,
+              type: "success",
+            },
+            { root: true }
+          );
+        }
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};
+
 export const getBankList = ({ commit }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_LOADING", true, { root: true });

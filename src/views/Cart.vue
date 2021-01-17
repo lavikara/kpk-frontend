@@ -134,7 +134,7 @@ export default {
     ...mapActions("notificationModule", ["showToast", "showModal"]),
     ...mapActions("paymentModule", [
       "cartPaymentDetails",
-      "generateVendorPaymentLink",
+      "generateCustomerPaymentLink",
     ]),
     checkout() {
       this.showModal({
@@ -142,7 +142,7 @@ export default {
         display: true,
         type: "info",
       });
-      this.generateVendorPaymentLink(this.details);
+      this.generateCustomerPaymentLink(this.details);
     },
     add(id) {
       this.addToCart({ product_id: id });
