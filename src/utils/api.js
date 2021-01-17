@@ -87,6 +87,11 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  generateCustomerPaymentLink(data) {
+    return axios.post(`${PAYMENT_URL}/generate`, data, {
+      headers: this.getCustomerHeader(),
+    });
+  },
   getVendorById(id) {
     return axios.get(`${USER_URL}/get-single-vendor/?id=${id}`, {
       headers: this.getVendorHeader(),

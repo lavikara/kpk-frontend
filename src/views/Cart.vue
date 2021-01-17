@@ -142,7 +142,7 @@ export default {
         display: true,
         type: "info",
       });
-      this.generateVendorPaymentLink(this.details);
+      this.generateCustomerPaymentLink(this.details);
     },
     add(id) {
       this.addToCart({ product_id: id });
