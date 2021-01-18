@@ -120,6 +120,9 @@ export default {
       headers: this.getCustomerHeader(),
     });
   },
+  verifyAccountNumber(data) {
+    return axios.post(`${PAYMENT_URL}/verify-account-number`, data);
+  },
   checkout() {
     return axios.get(`${CART_URL}/checkout`, {
       headers: this.getCustomerHeader(),

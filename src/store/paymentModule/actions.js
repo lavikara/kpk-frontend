@@ -85,30 +85,57 @@ export const createRiderSubAccount = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_LOADING", true, { root: true });
     api
-      .createRiderSubAccount(payload)
+      .verifyAccountNumber(payload.account_number)
       .then(({ data }) => {
-        commit("SET_LOADING", false, { root: true });
-        dispatch(
-          "notificationModule/showToast",
-          {
-            description: "Successful.",
-            display: true,
-            type: "success",
-          },
-          { root: true }
+        const found = data.data.data.find(
+          (details) => details.account_number === payload.account_number
         );
-        storage.setRider(data.data);
-        router.push("/rider-dashboard");
-        commit("CLEAR_ACCOUNT_DETAILS", {
-          accountDetails: {
-            country: "",
-            account_bank: "",
-            account_number: "",
-            business_mobile: "",
-            business_name: "",
-            business_email: "",
-          },
-        });
+        if (found) {
+          dispatch(
+            "notificationModule/showModal",
+            {
+              description: "Account number already exist",
+              display: true,
+              type: "error",
+            },
+            { root: true }
+          );
+        } else {
+          commit("SET_LOADING", true, { root: true });
+          api
+            .createRiderSubAccount(payload)
+            .then(({ data }) => {
+              commit("SET_LOADING", false, { root: true });
+              dispatch(
+                "notificationModule/showToast",
+                {
+                  description: "Successful.",
+                  display: true,
+                  type: "success",
+                },
+                { root: true }
+              );
+              storage.setRider(data.data);
+              router.push("/rider-dashboard");
+              commit("CLEAR_ACCOUNT_DETAILS", {
+                accountDetails: {
+                  country: "",
+                  account_bank: "",
+                  account_number: "",
+                  business_mobile: "",
+                  business_name: "",
+                  business_email: "",
+                },
+              });
+              resolve({ data });
+            })
+            .catch(({ data }) => {
+              commit("SET_LOADING", false, { root: true });
+              alert("an error occured");
+              reject({ data });
+            });
+        }
+        commit("SET_LOADING", false, { root: true });
         resolve({ data });
       })
       .catch(({ data }) => {
@@ -123,30 +150,57 @@ export const createVendorSubAccount = ({ commit, dispatch }, payload) => {
   return new Promise((resolve, reject) => {
     commit("SET_LOADING", true, { root: true });
     api
-      .createVendorSubAccount(payload)
+      .verifyAccountNumber(payload.account_number)
       .then(({ data }) => {
-        commit("SET_LOADING", false, { root: true });
-        dispatch(
-          "notificationModule/showToast",
-          {
-            description: "Successful.",
-            display: true,
-            type: "success",
-          },
-          { root: true }
+        const found = data.data.data.find(
+          (details) => details.account_number === payload.account_number
         );
-        storage.setVendor(data.data);
-        router.push("/vendor-dashboard");
-        commit("CLEAR_ACCOUNT_DETAILS", {
-          accountDetails: {
-            country: "",
-            account_bank: "",
-            account_number: "",
-            business_mobile: "",
-            business_name: "",
-            business_email: "",
-          },
-        });
+        if (found) {
+          dispatch(
+            "notificationModule/showModal",
+            {
+              description: "Account number already exist",
+              display: true,
+              type: "error",
+            },
+            { root: true }
+          );
+        } else {
+          commit("SET_LOADING", true, { root: true });
+          api
+            .createVendorSubAccount(payload)
+            .then(({ data }) => {
+              commit("SET_LOADING", false, { root: true });
+              dispatch(
+                "notificationModule/showToast",
+                {
+                  description: "Successful.",
+                  display: true,
+                  type: "success",
+                },
+                { root: true }
+              );
+              storage.setVendor(data.data);
+              router.push("/vendor-dashboard");
+              commit("CLEAR_ACCOUNT_DETAILS", {
+                accountDetails: {
+                  country: "",
+                  account_bank: "",
+                  account_number: "",
+                  business_mobile: "",
+                  business_name: "",
+                  business_email: "",
+                },
+              });
+              resolve({ data });
+            })
+            .catch(({ data }) => {
+              commit("SET_LOADING", false, { root: true });
+              alert("an error occured");
+              reject({ data });
+            });
+        }
+        commit("SET_LOADING", false, { root: true });
         resolve({ data });
       })
       .catch(({ data }) => {
