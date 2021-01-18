@@ -6,6 +6,7 @@
           >KPK<img src="@/assets/img/trolley.svg" alt="trolley icon"
         /></a>
       </h1>
+      <h3>Rider App</h3>
       <div class="links">
         <ul v-if="!riderDetails">
           <li>
@@ -100,6 +101,9 @@ export default {
         align-items: center;
         font-family: "Patrick Hand SC", cursive;
       }
+    }
+    h3 {
+      flex: 0.3;
     }
 
     .form {
