@@ -89,6 +89,7 @@ export default {
   data() {
     return {
       customerDetails: "",
+      subaccount: "",
     };
   },
   beforeRouteEnter: (to, from, next) => {
@@ -111,10 +112,11 @@ export default {
   },
   mounted() {
     this.customerDetails = storage.getCustomerDetails();
-    this.cartPaymentDetails({
-      customer: this.customerDetails,
-      amount: this.cart.total_price + this.cart.dispatch,
-    });
+    // this.cartPaymentDetails({
+    //   customer: this.customerDetails,
+    //   amount: this.cart.total_price + this.cart.dispatch,
+    //   subaccount: this.subaccount,
+    // });
   },
   computed: {
     ...mapState({
@@ -144,6 +146,25 @@ export default {
       });
       this.generateCustomerPaymentLink(this.details);
     },
+    calculateCommision() {
+      const vendorPay = this.cart.items.map((item) => {
+        const pay = item.sub_total - item.sub_total * 0.063;
+        return {
+          id: item.account_id,
+          transaction_charge_type: "flat_subaccount",
+          transaction_charge: pay, //exact money sub account should recieve
+        };
+      });
+      const dispatchPay = this.cart.items.map((item) => {
+        const pay = item.dispatch_price - item.dispatch_price * 0.238;
+        return {
+          id: item.dispatch_account_id,
+          transaction_charge_type: "flat_subaccount",
+          transaction_charge: pay, //exact money sub account should recieve
+        };
+      });
+      this.subaccount = vendorPay.concat(dispatchPay);
+    },
     add(id) {
       this.addToCart({ product_id: id });
     },
@@ -164,6 +185,16 @@ export default {
     paymentUrl(newValue, oldValue) {
       if (newValue !== oldValue) {
         window.location = newValue;
+      }
+    },
+    cart(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.calculateCommision();
+        this.cartPaymentDetails({
+          customer: this.customerDetails,
+          amount: this.cart.total_price + this.cart.dispatch,
+          subaccount: this.subaccount,
+        });
       }
     },
   },
