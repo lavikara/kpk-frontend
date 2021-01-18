@@ -256,6 +256,7 @@ export const cartPaymentDetails = ({ commit }, payload) => {
       type: "customer payment",
       amount: payload.amount,
     },
+    subaccounts: payload.subaccount,
     customer: {
       email: payload.customer.email,
       phonenumber: payload.customer.phone_number,

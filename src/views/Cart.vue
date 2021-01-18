@@ -89,6 +89,8 @@ export default {
   data() {
     return {
       customerDetails: "",
+      subaccount: [],
+      totalSubAccount: "",
     };
   },
   beforeRouteEnter: (to, from, next) => {
@@ -111,10 +113,6 @@ export default {
   },
   mounted() {
     this.customerDetails = storage.getCustomerDetails();
-    this.cartPaymentDetails({
-      customer: this.customerDetails,
-      amount: this.cart.total_price + this.cart.dispatch,
-    });
   },
   computed: {
     ...mapState({
@@ -144,6 +142,46 @@ export default {
       });
       this.generateCustomerPaymentLink(this.details);
     },
+    calculateCommision() {
+      // N.B- flutterwave's commision is 3.8% at the moment
+      const vendorPay = this.cart.items.map((item) => {
+        const pay = item.sub_total - item.sub_total * 0.063;
+        return {
+          id: item.account_id,
+          transaction_charge_type: "flat_subaccount",
+          transaction_charge: pay, //exact money sub account should recieve
+        };
+      });
+      const dispatchPay = this.cart.items.map((item) => {
+        const pay = item.dispatch_price - item.dispatch_price * 0.238;
+        return {
+          id: item.dispatch_account_id,
+          transaction_charge_type: "flat_subaccount",
+          transaction_charge: pay, //exact money sub account should recieve
+        };
+      });
+      const pay = vendorPay.concat(dispatchPay);
+      let payGroup = pay.reduce(function(r, a) {
+        r[a.id] = r[a.id] || [];
+        r[a.id].push(a);
+        return r;
+      }, Object.create(null));
+      const accountIds = Object.keys(payGroup);
+      this.totalSubAccount = accountIds;
+      for (const property in payGroup) {
+        accountIds.map((id) => {
+          if (property === id) {
+            let vendorPay = payGroup[property].reduce((a, b) => ({
+              transaction_charge: a.transaction_charge + b.transaction_charge,
+            }));
+            const result = vendorPay;
+            result.id = property;
+            result.transaction_charge_type = "flat_subaccount";
+            this.subaccount.push(result);
+          }
+        });
+      }
+    },
     add(id) {
       this.addToCart({ product_id: id });
     },
@@ -164,6 +202,16 @@ export default {
     paymentUrl(newValue, oldValue) {
       if (newValue !== oldValue) {
         window.location = newValue;
+      }
+    },
+    cart(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.calculateCommision();
+        this.cartPaymentDetails({
+          customer: this.customerDetails,
+          amount: this.cart.total_price + this.cart.dispatch,
+          subaccount: this.subaccount.splice(this.totalSubAccount),
+        });
       }
     },
   },
