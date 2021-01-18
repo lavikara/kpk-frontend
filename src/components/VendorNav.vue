@@ -6,6 +6,7 @@
           >KPK<img src="@/assets/img/trolley.svg" alt="trolley icon"
         /></a>
       </h1>
+      <h3>Vendor App</h3>
       <div class="links">
         <ul v-if="!vendorDetails">
           <li>
