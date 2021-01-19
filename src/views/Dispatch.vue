@@ -23,8 +23,16 @@
               {{ rider.address.state | setUppercase }}.
             </p>
             <label class="label" for="contact details">Contact details</label>
-            <h3 class="number">0{{ rider.phone_number }}</h3>
-            <h3 class="email">{{ rider.email }}</h3>
+            <h3 class="number">
+              <img src="@/assets/img/phone.svg" alt="phone icon" />0{{
+                rider.phone_number
+              }}
+            </h3>
+            <h3 class="email">
+              <img src="@/assets/img/mail.svg" alt="phone icon" />{{
+                rider.email
+              }}
+            </h3>
             <button @click="removeDispatch(rider._id)">
               Remove dispatch
             </button>
@@ -46,8 +54,16 @@
               {{ rider.address.state | setUppercase }}.
             </p>
             <label class="label" for="contact details">Contact details</label>
-            <h3 class="number">0{{ rider.phone_number }}</h3>
-            <h3 class="email">{{ rider.email }}</h3>
+            <h3 class="number">
+              <img src="@/assets/img/phone.svg" alt="phone icon" />0{{
+                rider.phone_number
+              }}
+            </h3>
+            <h3 class="email">
+              <img src="@/assets/img/mail.svg" alt="phone icon" />{{
+                rider.email
+              }}
+            </h3>
             <button @click="selectDispatch(rider.id)">
               Select dispatch
             </button>
@@ -179,19 +195,28 @@ export default {
       }
 
       .label {
-        font-size: 14px;
-        font-weight: 700;
+        font-size: 1rem;
         opacity: 0.6;
       }
 
       .number {
-        font-size: 12px;
-        margin: 0.5rem 0 0.2rem 0;
+        font-size: 0.9rem;
+        margin: 0.8rem 0 0.5rem 0;
       }
 
       .email {
-        font-size: 12px;
+        font-size: 0.9rem;
       }
+
+      h3 {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 0.3rem;
+        }
+      }
+
       button {
         display: flex;
         align-items: center;
