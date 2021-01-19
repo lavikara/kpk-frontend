@@ -100,8 +100,8 @@ export const createRiderSubAccount = ({ commit, dispatch }, payload) => {
             },
             { root: true }
           );
+          commit("SET_LOADING", false, { root: true });
         } else {
-          commit("SET_LOADING", true, { root: true });
           api
             .createRiderSubAccount(payload)
             .then(({ data }) => {
@@ -127,6 +127,7 @@ export const createRiderSubAccount = ({ commit, dispatch }, payload) => {
                   business_email: "",
                 },
               });
+              commit("SET_LOADING", false, { root: true });
               resolve({ data });
             })
             .catch(({ data }) => {
@@ -135,7 +136,6 @@ export const createRiderSubAccount = ({ commit, dispatch }, payload) => {
               reject({ data });
             });
         }
-        commit("SET_LOADING", false, { root: true });
         resolve({ data });
       })
       .catch(({ data }) => {
@@ -165,8 +165,8 @@ export const createVendorSubAccount = ({ commit, dispatch }, payload) => {
             },
             { root: true }
           );
+          commit("SET_LOADING", false, { root: true });
         } else {
-          commit("SET_LOADING", true, { root: true });
           api
             .createVendorSubAccount(payload)
             .then(({ data }) => {
@@ -192,6 +192,7 @@ export const createVendorSubAccount = ({ commit, dispatch }, payload) => {
                   business_email: "",
                 },
               });
+              commit("SET_LOADING", false, { root: true });
               resolve({ data });
             })
             .catch(({ data }) => {
@@ -200,7 +201,6 @@ export const createVendorSubAccount = ({ commit, dispatch }, payload) => {
               reject({ data });
             });
         }
-        commit("SET_LOADING", false, { root: true });
         resolve({ data });
       })
       .catch(({ data }) => {
