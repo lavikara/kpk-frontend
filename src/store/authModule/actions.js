@@ -51,7 +51,7 @@ export const signupVendor = ({ commit, dispatch }, payload) => {
         dispatch(
           "notificationModule/showToast",
           {
-            description: "An error occured",
+            description: "Try a different email or phone number",
             display: true,
             type: "error",
           },
@@ -112,7 +112,7 @@ export const signupRider = ({ commit, dispatch }, payload) => {
         dispatch(
           "notificationModule/showToast",
           {
-            description: "An error occured",
+            description: "Try a different email or phone number",
             display: true,
             type: "error",
           },
