@@ -15,7 +15,7 @@
             <p>{{ product.description | setUppercase }}</p>
             <h4>Price: ${{ product.price.toLocaleString() }}</h4>
             <h4>Quantity available: {{ product.stock.quantity_available }}</h4>
-            <button @click="add(product.id)">
+            <button>
               <span>
                 Update product
               </span>
@@ -41,9 +41,7 @@ export default {
     ContentLoader,
   },
   data() {
-    return {
-      // items: [],
-    };
+    return {};
   },
   mounted() {
     this.getVendorProduct();
@@ -57,18 +55,6 @@ export default {
   methods: {
     ...mapActions("userModule", ["getVendorProduct"]),
   },
-  // watch: {
-  //   details(newValue, oldValue) {
-  //     if (newValue !== oldValue) {
-  //       let x = [];
-  //       this.details.history.order_history.map((arr) => {
-  //         arr.items.map((item) => {
-  //           this.items.push(item);
-  //         });
-  //       });
-  //     }
-  //   },
-  // },
 };
 </script>
 
@@ -108,10 +94,10 @@ export default {
         flex: 1;
         display: flex;
         align-items: center;
+        margin-right: 2em;
 
         img {
-          border-top-left-radius: 10px;
-          border-bottom-left-radius: 10px;
+          border-radius: 10px;
         }
       }
 
