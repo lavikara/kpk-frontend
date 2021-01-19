@@ -7,7 +7,8 @@
           class="noty"
           v-if="!loading && vendorDetails.asigned_riders.length === 0"
         >
-          You can't upload products if you don't select a dispatch.
+          If you don't select a dispatch, products already uploaded<br />
+          would be removed from the shop and you can't upload products.
         </h3>
         <ul>
           <li
@@ -152,6 +153,7 @@ export default {
 
     .noty {
       margin: 4rem 0 0 0;
+      line-height: 1.5;
     }
 
     ul {
