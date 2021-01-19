@@ -3,6 +3,7 @@ import storage from "@/utils/storage.js";
 
 const BASE_URL = process.env.VUE_APP_BASE_URL;
 const USER_URL = `${BASE_URL}/user`;
+const HISTORY_URL = `${BASE_URL}/history`;
 const PRODUCT_URL = `${BASE_URL}/product`;
 const CART_URL = `${BASE_URL}/cart`;
 const PAYMENT_URL = `${BASE_URL}/payment`;
@@ -126,6 +127,16 @@ export default {
   checkout() {
     return axios.get(`${CART_URL}/checkout`, {
       headers: this.getCustomerHeader(),
+    });
+  },
+  getCustomerHistory() {
+    return axios.get(`${HISTORY_URL}/customer-history`, {
+      headers: this.getCustomerHeader(),
+    });
+  },
+  getVendorProduct() {
+    return axios.get(`${PRODUCT_URL}/vendor-product`, {
+      headers: this.getVendorHeader(),
     });
   },
 };
