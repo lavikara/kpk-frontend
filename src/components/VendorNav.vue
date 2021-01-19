@@ -89,7 +89,10 @@ export default {
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap");
 #topnav {
+  position: sticky;
+  top: 0;
   background: var(--cyanBlue);
+  z-index: 1000;
 
   .topnav {
     display: flex;
