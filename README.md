@@ -1,5 +1,8 @@
 # ecommerce-frontend
-
+### An e-commerce app.
+```
+N.B: Test accounts 0690000031 to 0690000040 has been used on this app.
+```
 ## Project setup
 ```
 yarn install
