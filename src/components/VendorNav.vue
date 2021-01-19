@@ -41,7 +41,7 @@
             <router-link to="/upload-product">Upload product</router-link>
           </li>
           <li>
-            <router-link to="/edit-product">Edit product</router-link>
+            <router-link to="/product">Products</router-link>
           </li>
         </ul>
       </div>
