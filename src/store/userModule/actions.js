@@ -146,3 +146,23 @@ export const getVendorProduct = ({ commit }, payload) => {
       });
   });
 };
+
+export const getAssignedStore = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .getAssignedStore()
+      .then(({ data }) => {
+        commit("UPDATE_ASSIGNED_STORE", {
+          store: data.data,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};

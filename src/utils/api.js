@@ -139,4 +139,9 @@ export default {
       headers: this.getVendorHeader(),
     });
   },
+  getAssignedStore() {
+    return axios.get(`${USER_URL}/assigned-store`, {
+      headers: this.getRiderHeader(),
+    });
+  },
 };
