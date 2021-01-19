@@ -106,3 +106,63 @@ export const getVendorById = ({ commit }, payload) => {
       });
   });
 };
+
+export const getCustomerHistory = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .getCustomerHistory(payload)
+      .then(({ data }) => {
+        commit("UPDATE_CUSTOMER_HISTORY", {
+          history: data.data,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};
+
+export const getVendorProduct = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .getVendorProduct()
+      .then(({ data }) => {
+        commit("UPDATE_VENDOR_PRODUCTS", {
+          products: data.data,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};
+
+export const getAssignedStore = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("SET_LOADING", true, { root: true });
+    api
+      .getAssignedStore()
+      .then(({ data }) => {
+        commit("UPDATE_ASSIGNED_STORE", {
+          store: data.data,
+        });
+        commit("SET_LOADING", false, { root: true });
+        resolve({ data });
+      })
+      .catch(({ data }) => {
+        commit("SET_LOADING", false, { root: true });
+        alert("an error occured");
+        reject({ data });
+      });
+  });
+};

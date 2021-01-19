@@ -5,4 +5,13 @@ export default {
   vendorDetails: {
     vendor: "",
   },
+  customerHistory: {
+    history: "",
+  },
+  vendorProduct: {
+    products: "",
+  },
+  assignedStore: {
+    store: "",
+  },
 };

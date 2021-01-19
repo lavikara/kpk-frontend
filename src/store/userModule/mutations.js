@@ -4,3 +4,12 @@ export const UPDATE_ALL_RIDERS = (state, payload) => {
 export const UPDATE_VENDOR_DETAILS = (state, payload) => {
   state.vendorDetails.vendor = payload.vendor;
 };
+export const UPDATE_CUSTOMER_HISTORY = (state, payload) => {
+  state.customerHistory.history = payload.history;
+};
+export const UPDATE_VENDOR_PRODUCTS = (state, payload) => {
+  state.vendorProduct.products = payload.products;
+};
+export const UPDATE_ASSIGNED_STORE = (state, payload) => {
+  state.assignedStore.store = payload.store;
+};
