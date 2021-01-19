@@ -1,9 +1,39 @@
 <template>
-  <div id="vendor-dashboard">
+  <div id="vendor-dashboard" class="container">
     <div v-if="vendorDetails.account_details">
-      <h1 v-if="!loading && vendorDetails.is_registered === true">
-        hello from vendor dashboard
-      </h1>
+      <div
+        class="vendor-details"
+        v-if="!loading && vendorDetails.is_registered === true"
+      >
+        <div class="profile">
+          <h3 class="shop-name">
+            {{ vendorDetails.business_name | setUppercase }}
+          </h3>
+          <p class="address">
+            {{ vendorDetails.address.street | setUppercase }},
+            {{ vendorDetails.address.lga | setUppercase }},
+            {{ vendorDetails.address.state | setUppercase }},
+            {{ vendorDetails.country | setUppercase }}.
+          </p>
+          <h4 class="contact-person">
+            <img src="@/assets/img/profile.svg" alt="profile icon" />{{
+              vendorDetails.first_name | setUppercase
+            }}
+            {{ vendorDetails.last_name | setUppercase }}
+          </h4>
+          <h4 class="phone">
+            <img src="@/assets/img/phone.svg" alt="phone icon" />0{{
+              vendorDetails.phone_number
+            }}
+          </h4>
+          <h4 class="email">
+            <img src="@/assets/img/mail.svg" alt="mail icon" />{{
+              vendorDetails.email
+            }}
+          </h4>
+        </div>
+      </div>
+      <div class="shop-statistics">Shop statistics</div>
       <div
         class="approve-div container"
         v-if="!loading && vendorDetails.is_registered === false"
@@ -116,6 +146,50 @@ export default {
     100% {
       opacity: 1;
     }
+  }
+
+  .vendor-details {
+    display: flex;
+    margin-top: 3rem;
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: #ffffff;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+
+      .shop-name {
+        margin-bottom: 0.5rem;
+      }
+
+      .address {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .contact-person,
+      .phone,
+      .email {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        margin: 0.3rem 0.5rem 0.3rem 0;
+
+        img {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .shop-statistics {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10rem;
+    margin: 4rem 0;
   }
 
   .approve-div {
