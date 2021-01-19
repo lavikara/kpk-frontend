@@ -1,31 +1,42 @@
 <template>
   <div id="vendor-dashboard">
-    <h1 v-if="!loading && vendorDetails.is_registered === true">
-      hello from vendor dashboard
-    </h1>
-    <div
-      class="approve-div container"
-      v-if="!loading && vendorDetails.is_registered === false"
-    >
-      <h1 v-if="!loading && vendorDetails.account_details.country === ''">
-        Please input your account details.
+    <div v-if="vendorDetails.account_details">
+      <h1 v-if="!loading && vendorDetails.is_registered === true">
+        hello from vendor dashboard
       </h1>
-      <h1 v-if="!loading && vendorDetails.account_details.country !== ''">
-        Your shop has not been approved, please pay $20 registration fee.<br />
-        (If you've paied and still get this notification, just logout and login
-        again)
+      <div
+        class="approve-div container"
+        v-if="!loading && vendorDetails.is_registered === false"
+      >
+        <h1 v-if="!loading && vendorDetails.account_details.country === ''">
+          Please input your account details.
+        </h1>
+        <h1 v-if="!loading && vendorDetails.account_details.country !== ''">
+          Your shop has not been approved, please pay $20 registration fee.<br />
+          (If you've paied and still get this notification, just logout and
+          login again)
+        </h1>
+        <button
+          @click="pay"
+          v-if="!loading && vendorDetails.account_details.country !== ''"
+        >
+          Pay<span class="loader" v-if="loading"></span>
+        </button>
+        <router-link
+          to="/vendor-account"
+          class="button"
+          v-if="!loading && vendorDetails.account_details.country === ''"
+        >
+          Input details<span class="loader" v-if="loading"></span>
+        </router-link>
+      </div>
+    </div>
+    <div class="approve-div container" v-if="!vendorDetails.account_details">
+      <h1 v-if="!loading">
+        Invalid account details provided,<br />
+        please enter valid account details.
       </h1>
-      <button
-        @click="pay"
-        v-if="!loading && vendorDetails.account_details.country !== ''"
-      >
-        Pay<span class="loader" v-if="loading"></span>
-      </button>
-      <router-link
-        to="/vendor-account"
-        class="button"
-        v-if="!loading && vendorDetails.account_details.country === ''"
-      >
+      <router-link to="/vendor-account" class="button" v-if="!loading">
         Input details<span class="loader" v-if="loading"></span>
       </router-link>
     </div>
