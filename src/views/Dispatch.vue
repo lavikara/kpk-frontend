@@ -158,7 +158,7 @@ export default {
   }
   .rider-container {
     display: grid;
-    grid-template-columns: repeat(1fr);
+    grid-template-columns: 1fr;
     padding-top: 3rem;
 
     h1 {
@@ -196,7 +196,7 @@ export default {
 
       .label {
         font-size: 1rem;
-        opacity: 0.6;
+        color: #99b8e9;
       }
 
       .number {
