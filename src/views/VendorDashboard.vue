@@ -1,6 +1,6 @@
 <template>
   <div id="vendor-dashboard" class="container">
-    <div v-if="vendorDetails.account_details">
+    <div v-if="!loading">
       <div
         class="vendor-details"
         v-if="!loading && vendorDetails.is_registered === true"
@@ -33,7 +33,12 @@
           </h4>
         </div>
       </div>
-      <div class="shop-statistics">Shop statistics</div>
+      <div
+        class="shop-statistics"
+        v-if="!loading && vendorDetails.is_registered === true"
+      >
+        Shop statistics
+      </div>
       <div
         class="approve-div container"
         v-if="!loading && vendorDetails.is_registered === false"
